@@ -1,0 +1,268 @@
+
+
+.tmp-profile-card {
+    border: 0;
+    background-color: #010d16;
+    box-shadow: 0 1px 2px 0 rgba(26, 31, 44, 0.25);
+    border-radius: 8px;
+    height: 100%;
+  }
+  
+  .tmp-profile-card.with-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+    height: max-content !important;
+  }
+  
+  .tmp-profile-card image {
+    background-color: #010d16;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .tmp-profile-card .text {
+    margin-top: 9px;
+  }
+  
+  .tmp-profile-card .text .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.333em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  
+  .tmp-profile-card .text p {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  .tmp-profile-card .text p span {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  
+  .tmp-profile-card .common-button-groups {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  @media only screen and (max-width: 575px) {
+    .tmp-profile-card .common-button-groups {
+      flex-direction: column;
+    }
+  }
+  .tmp-profile-card .common-button-groups .tmp-btn .btn-text {
+    margin-right: 5px;
+  }
+  
+  .tmp-profile-card .common-button-groups .tmp-btn.btn-md {
+    padding: 0 6px;
+  }
+
+  
+.tmp-profile-card .work-experiance-card .work-experiance-main {
+    max-height: 218px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+ 
+
+
+  .with-bento-about-banner.tmp-profile-card {
+    background-color: var(--color-card);
+    padding: 35px;
+  }
+
+
+  .tmp-profile-card .work-experiance-card {
+    overflow: hidden;
+    height: 310px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.333em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-main {
+    max-height: 218px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-main:hover .work-experiance-slider {
+    animation-play-state: paused;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider {
+    animation: scrollY 10s linear infinite;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li {
+    display: flex !important;
+    gap: 30px;
+    padding: 10px 15px;
+    background: #141c21;
+    border-radius: 5px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li:first-child {
+    margin-top: 0;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .date {
+    margin-right: 40px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .date p {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .info {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px !important;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .info .icon {
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(43, 43, 43, 0.3803921569);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .info .icon img {
+    width: 20px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .info .text {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .info .text .title {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .tmp-profile-card .work-experiance-card .work-experiance-slider li .info .text .subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--color-body);
+  }
+
+
+  
+.tmp-profile-card .expertise-card .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.333em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  
+  .tmp-profile-card .expertise-card .expertise-item {
+    text-align: center;
+  }
+  
+  .tmp-profile-card .expertise-card .expertise-item .image {
+    background-color: rgba(43, 43, 43, 0.3803921569);
+    border-radius: 8px;
+    padding: 17px 10px;
+  }
+  
+  .tmp-profile-card .expertise-card .expertise-item .image img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .tmp-profile-card .expertise-card .expertise-item .text .title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5em;
+    margin-top: 0;
+  }
+  
+  .tmp-profile-card .expertise-card .row > * {
+    margin-top: 1rem;
+  }
+  
+  .tmp-profile-card .expertise-card .g-2 {
+    --bs-gutter-y: .5rem !important;
+    --bs-gutter-x: .5rem !important;
+  }
+  
+  .tmp-profile-card .expertise-card .g-3 {
+    --bs-gutter-y: 1rem !important;
+    --bs-gutter-x: 1rem !important;
+  }
+  
+  .tmp-profile-card.services-card .services-item {
+    background-color: rgba(43, 43, 43, 0.3803921569);
+    padding: 16px 16px 24px 16px;
+    border-radius: 10px;
+  }
+  
+  .tmp-profile-card.services-card .services-item .image {
+    background-color: rgb(1, 14, 22);
+    border-radius: 5px;
+    padding: 25px 14px;
+  }
+  
+  .tmp-profile-card.services-card .services-item .image img {
+    max-width: 58px;
+    margin: auto;
+  }
+  
+  .tmp-profile-card.services-card .services-item .text .title {
+    font-size: 18px !important;
+    margin: 0;
+  }
+  
+  .tmp-profile-card.services-card .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.333em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  

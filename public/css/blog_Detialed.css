@@ -1,0 +1,176 @@
+.overflow-hidden.left_image {
+    padding-left: 20px !important;
+}
+
+.overflow-hidden.graph_total img {
+    height: auto !important;
+}
+
+.overflow-hidden.brand_understand img {
+    height: 600px !important;
+}
+
+ 
+.luxury-heading {
+    font-family: "Exo", serif !important;
+    font-size: 35px !important;
+    /* adjust size */
+    font-weight: 600 !important;
+    /* line-height: 1 !important; */
+    /* letter-spacing: 2px !important; */
+    text-align: left !important;
+  
+    /* layered gradients: color band + subtle metallic sheen */
+    background-image:
+      linear-gradient(90deg, 
+        #f0b02c 0%,
+        #e4a626 20%,
+        #e79a32 45%,
+        #f0b02c 60%,
+        #f0b02c 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);
+  
+    /* clip the gradient to the text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* for Safari/Chrome */
+    color: transparent;
+  
+    /* optional metallic feel with soft shadow */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    margin-bottom: 5px !important;
+    /* display: inline-block; */
+  }
+  h3.luxury-heading {
+    font-family: "Exo", serif !important;
+    font-size: 35px !important;
+    /* adjust size */
+    font-weight: 600 !important;
+    /* line-height: 1 !important; */
+    /* letter-spacing: 2px !important; */
+    text-align: left !important;
+  
+    /* layered gradients: color band + subtle metallic sheen */
+    background-image:
+      linear-gradient(90deg, 
+        #f0b02c 0%,
+        #e4a626 20%,
+        #e79a32 45%,
+        #f0b02c 60%,
+        #f0b02c 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);
+  
+    /* clip the gradient to the text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* for Safari/Chrome */
+    color: transparent;
+  
+    /* optional metallic feel with soft shadow */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    margin-bottom: 5px !important;
+    /* display: inline-block; */
+  }
+
+.overflow-hidden.p_right img{
+    margin-left: 20px !important;
+    height: auto !important;
+}
+h2.split-text.right.text-initial {
+    font-size: 39px !important;
+    border-radius: 0 !important;
+}
+.service_content {
+    padding: 10px !important;
+}
+ 
+ 
+p.item-popup.pragraph {
+    line-height: 1.7 !important;
+    word-spacing: 1px !important;
+}
+p.section__title.hero-text.text-left {
+    line-height: 1.7 !important;
+    word-spacing: 2px !important;
+}
+.section__header p {
+    font-size: 16px !important;
+}
+p.item-popup {
+    font-size: 18px;
+    line-height: 1.7 !important;
+    word-spacing: 1px !important;
+    margin-bottom: 15px !important;
+    font-family: "Exo", serif !important;
+}
+.about__content p:not(:first-child) {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+.about__content.left_content {
+    margin-right: 15px !important;
+}
+.about__content {
+    text-align: justify !important;
+
+}
+
+.overflow-hidden.right_image img {
+    padding-left: 10px !important;
+}
+
+.col-xl-6.d-none.d-xl-block {
+    padding-right: 10px !important;
+}
+h1.breadcrumb__title.split-text.right.text-initial {
+    text-align: left !important;
+    font-size: 50px;
+    margin-bottom: 20px !important;
+}
+.container-fluid.section-mini-padding-top-bottom {
+    padding-top: 30px !important;
+}
+.Blog_data {
+    margin-top: 30px !important;
+}
+.section-bottom {
+    margin-bottom: 20px !important;
+}
+
+
+@media (max-width: 576px) {
+    
+    p.info-title {
+        font-size: 14px !important;
+    }
+    p.info {
+        font-size: 14px !important;
+    }
+    .none {
+        display: none !important;
+    }
+    h1.breadcrumb__title.split-text.right.text-initial {
+        text-align: left !important;
+        font-size: 21px;
+        margin-bottom: 20px !important;
+    }
+    .blog-details__thumb {
+        margin-bottom: 20px !important;
+    }
+    h2.section__title.split-text.right.text-initial {
+        font-size: 20px !important;
+    }
+    .overflow-hidden.right_image img {
+        padding-left: 0 !important;
+    }
+    .overflow-hidden.left_image {
+        padding-left: 0 !important;
+    }
+    h2.section__title.split-text.right.text-initial.faq {
+        margin-bottom: 36px !important;
+    }
+    
+}
+ 

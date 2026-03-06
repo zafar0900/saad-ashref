@@ -1,0 +1,151 @@
+.overflow-hidden img{
+    height: auto !important;
+    width: 100% !important;
+    /* object-fit: contain !important; */
+  }
+  .container--extend .first .image__thumb {
+    padding: 130px !important;
+    border-radius: 0 !important;
+  }
+  h2.split-text.right.text-initial {
+    font-size: 39px !important;
+    border-radius: 0 !important;
+} 
+.service_content {
+    padding: 10px !important;
+}
+.about__content {
+    margin-top: 20px !important;
+}
+.overflow-hidden {
+    padding-right: 20px !important;
+}
+p.item-popup.pragraph {
+    line-height: 1.7 !important;
+    word-spacing: 1px !important;
+}
+p.section__title.hero-text.text-left {
+    line-height: 1.7 !important;
+    word-spacing: 2px !important;
+}
+.section__header p {
+    font-size: 16px !important;
+}
+p.item-popup {
+    font-size: 18px;
+    line-height: 1.7 !important;
+    word-spacing: 1px !important;
+    font-family: "Exo", serif !important;
+}
+
+.overflow-hidden.left_image {
+    padding-left: 20px !important;
+}
+
+.overflow-hidden.graph_total img {
+    height: 400px !important;
+}
+
+.overflow-hidden.brand_understand img {
+    height: 600px !important;
+}
+.container--extend {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+.overflow-hidden.p_right img{
+    margin-left: 20px !important;
+    height: auto !important;
+}
+.light-theme.new-color.min-vh-100.bg-isabelline {
+    margin-top: -30px !important;
+}
+.bg-smoky-black {
+  background: #000 !important;
+} 
+.section__header {
+  margin-bottom: 10px !important;
+}
+
+ 
+.luxury-heading {
+    font-family: "Exo", serif !important;
+    font-size: 35px !important;
+    /* adjust size */
+    font-weight: 600 !important;
+    /* line-height: 1 !important; */
+    /* letter-spacing: 2px !important; */
+    text-align: left !important;
+  
+    /* layered gradients: color band + subtle metallic sheen */
+    background-image:
+      linear-gradient(90deg, 
+        #f0b02c 0%,
+        #e4a626 20%,
+        #e79a32 45%,
+        #f0b02c 60%,
+        #f0b02c 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);
+  
+    /* clip the gradient to the text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* for Safari/Chrome */
+    color: transparent;
+  
+    /* optional metallic feel with soft shadow */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    margin-bottom: 5px !important;
+    /* display: inline-block; */
+  }
+  h3.luxury-heading {
+    font-family: "Exo", serif !important;
+    font-size: 35px !important;
+    /* adjust size */
+    font-weight: 600 !important;
+    /* line-height: 1 !important; */
+    /* letter-spacing: 2px !important; */
+    text-align: left !important;
+  
+    /* layered gradients: color band + subtle metallic sheen */
+    background-image:
+      linear-gradient(90deg, 
+        #f0b02c 0%,
+        #e4a626 20%,
+        #e79a32 45%,
+        #f0b02c 60%,
+        #f0b02c 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);
+  
+    /* clip the gradient to the text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* for Safari/Chrome */
+    color: transparent;
+  
+    /* optional metallic feel with soft shadow */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    margin-bottom: 5px !important;
+    /* display: inline-block; */
+  }
+
+  @media (max-width: 567px) {
+    .luxury-heading {
+      font-size: 19px !important;
+    }
+    .faq_margin {
+      margin-top: 20px !important;
+    }
+    .first {
+      display: none !important;
+    }
+  }
+
+
+
+
+
+ 

@@ -1,0 +1,53 @@
+section.portfolio-details-area.section-padding-bottom.overflow-hidden {
+    margin-top: 20px !important;
+}
+h1.breadcrumb__title.split-text.left.text-initial {
+    font-size: 50px !important;
+}
+
+h1.luxury-heading {
+    font-family: "Exo", serif !important;
+    font-size: 35px !important;
+    /* adjust size */
+    font-weight: 600 !important;
+    /* line-height: 1 !important; */
+    /* letter-spacing: 2px !important; */
+    text-align: left !important;
+  
+    /* layered gradients: color band + subtle metallic sheen */
+    background-image:
+      linear-gradient(90deg, 
+        #f0b02c 0%,
+        #e4a626 20%,
+        #e79a32 45%,
+        #f0b02c 60%,
+        #f0b02c 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);
+  
+    /* clip the gradient to the text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* for Safari/Chrome */
+    color: transparent;
+  
+    /* optional metallic feel with soft shadow */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    margin-bottom: 5px !important;
+    /* display: inline-block; */
+  }
+@media (max-width: 576px) { 
+    h1.breadcrumb__title.split-text.left.text-initial {
+        font-size: 18px !important;
+    }
+    section.portfolio-details-area.section-padding-bottom.overflow-hidden {
+        margin-top: 10px !important;
+    }
+    .portfolio-details__thumb.reveal.right.overflow-hidden {
+        margin-bottom: 20px !important;
+    }
+    h1.breadcrumb__title.split-text.left.text-initial {
+        margin-left: 10px !important;
+    }
+    
+}

@@ -1,0 +1,54 @@
+@media only screen and (max-width: 1199.98px) {
+    .hero-photostudio-area {
+      padding-top: 60px;
+    }
+  }
+  @media only screen and (max-width: 575.98px) {
+    .hero-photostudio-area {
+      padding-top: 30px;
+    }
+  }
+
+  .section-padding-top {
+    padding-top: 20px!important;
+}
+
+.section-padding-top-bottom {
+    padding-top: 20px!important;
+    padding-bottom: 20px!important;
+}  
+
+/*=======> utility classes start here <=======*/
+.section-padding-top-bottom {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  @media only screen and (max-width: 767.98px) {
+    .section-padding-top-bottom {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+  }
+  
+  .section-padding-top {
+    padding-top: 120px;
+  }
+  @media only screen and (max-width: 767.98px) {
+    .section-padding-top {
+      padding-top: 60px;
+    }
+  }
+
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl, .container--extend {
+    max-width: 85%!important;
+    min-width: 85%!important;
+    width: 85%!important;
+padding-right:0px!important;
+padding-left: 0px!important;
+}
+
+@media (min-width: 1400px) {
+    .container--extend {
+      max-width: 1770px;
+    }
+  }
