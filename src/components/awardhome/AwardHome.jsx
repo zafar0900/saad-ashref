@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
 
@@ -48,8 +48,33 @@ function ServiceSection() {
 
     const [activeCategory, setActiveCategory] = useState(categories[0]?.id);
     const [hoveredCategory, setHoveredCategory] = useState(null);
-
     const [isHovered, setIsHovered] = useState(false);
+    const [arrowX, setArrowX] = useState(null);
+    const categoriesRef = useRef(null);
+    const circleRefs = useRef({});
+
+    const updateArrow = (id) => {
+        const circleEl = circleRefs.current[id];
+        const containerEl = categoriesRef.current;
+        if (!circleEl || !containerEl) return;
+        const circleRect = circleEl.getBoundingClientRect();
+        const containerRect = containerEl.getBoundingClientRect();
+        const center = circleRect.left + circleRect.width / 2 - containerRect.left;
+        setArrowX(center);
+    };
+
+    // Measure after first paint so there's no jump from 0 to real position
+    useEffect(() => {
+        if (activeCategory) {
+            requestAnimationFrame(() => updateArrow(activeCategory));
+        }
+    }, []);
+
+    const handleCategoryClick = (id) => {
+        const next = activeCategory === id ? null : id;
+        setActiveCategory(next);
+        if (next) updateArrow(next);
+    };
 
     return (
         <>
@@ -67,28 +92,28 @@ function ServiceSection() {
 
                                     </div>
                                 </div>
-                                <div className="categories">
-
-
+                                <div className="categories" ref={categoriesRef}>
                                     {categories.map((cat) => (
-
-
-
                                         <div
                                             key={cat.id}
-                                            className={`category-item  col-md-2 ${activeCategory === cat.id ? "active" : ""}`}
-                                            onClick={() =>
-                                                setActiveCategory(activeCategory === cat.id ? null : cat.id)
-                                            }
+                                            ref={(el) => { circleRefs.current[cat.id] = el; }}
+                                            className={`category-item col-md-2 ${activeCategory === cat.id ? "active" : ""}`}
+                                            onClick={() => handleCategoryClick(cat.id)}
                                         >
-
                                             <div className="circle">
                                                 <h5>{cat.label}</h5>
                                                 <span>{cat.event}</span>
                                             </div>
-
                                         </div>
                                     ))}
+                                </div>
+
+                                {/* Animated arrow pointing at active circle */}
+                                <div className="arrow-track">
+                                    <div
+                                        className={`animated-arrow ${activeCategory && arrowX !== null ? "arrow-visible" : ""}`}
+                                        style={{ transform: `translateX(calc(${arrowX ?? 0}px - 50%))` }}
+                                    />
                                 </div>
                             </div>
 
@@ -315,18 +340,29 @@ function ServiceSection() {
   
 }
 
-/* speech arrow */
-.portfolio-card:before{
-  content:"";
-  position:absolute;
-  top:-15px;          /* move arrow above card */
-  left:50%;           /* center horizontally */
-  transform:translateX(-0%);
-  width:0;
-  height:0;
-  border-top:14px solid transparent;
-  border-bottom:14px solid transparent;
-  border-right:18px solid #f0b02c;
+/* animated arrow track */
+.arrow-track {
+  position: relative;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.animated-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 18px solid #f0b02c;
+  opacity: 0;
+  will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+}
+
+.animated-arrow.arrow-visible {
+  opacity: 1;
 }
 
 .title{
