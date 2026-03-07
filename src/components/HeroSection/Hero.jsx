@@ -6,8 +6,6 @@ import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import { gsap } from "gsap";
-import Prism from '../Animated/HeroBackground/Background';
-
 import Contact4 from "@/components/HeroSection/Contact4";
 export default function Hero2({ light = false }) {
   const form = useRef();
@@ -71,22 +69,9 @@ export default function Hero2({ light = false }) {
   };
 
   return (
-    <div className="tmp-banner-one-area add-pattern" id="home">
-        <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-  <Prism
-    animationType="rotate"
-    timeScale={0.3}
-    height={7.8}
-    baseWidth={8.5}
-    scale={3.6}
-    hueShift={0}
-    colorFrequency={1.8}
-    noise={0}
-    glow={1}
-  />
-</div>
-      <div className="separator-animated-border border-top-footer animated-true"></div>
-      <div className="container">
+    <div className="tmp-banner-one-area add-pattern" id="home" style={{ position: 'relative' }}>
+      <div className="separator-animated-border border-top-footer animated-true" style={{ position: 'relative', zIndex: 1 }}></div>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="banner-one-main-wrapper">
           <div className="row marginTop">
             <div className="col-lg-7 order-lg-1 padding">

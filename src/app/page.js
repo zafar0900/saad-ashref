@@ -40,6 +40,7 @@ import EventsSection from "@/components/EventsSection/EventsSection";
 import AwardHome from "../components/awardhome/AwardHome"
 
 import LightMode from "@/components/LightMode";
+import Prism from "@/components/Animated/HeroBackground/Background";
 
 export const metadata = {
   title: "Freelance Graphic Designer Dubai | Logo Designer UAE by Saad",
@@ -59,10 +60,41 @@ export const metadata = {
 export default function Home() {
   return (
     <>
-      <Header /> 
+      <div style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Prism background behind header + hero */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+          <Prism
+            animationType="rotate"
+            timeScale={0.3}
+            height={7.8}
+            baseWidth={8.5}
+            scale={3.6}
+            hueShift={0}
+            colorFrequency={1.8}
+            noise={0}
+            glow={1}
+          />
+        </div>
+        {/* Gradient fade at the bottom into the next section */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '180px',
+          background: 'linear-gradient(to bottom, transparent, #000)',
+          zIndex: 2,
+          pointerEvents: 'none'
+        }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <Header />
+        </div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <HeroMeanSection />
+        </div>
+      </div>
       <main>
         {/* <AboutSections/> */}
-        <HeroMeanSection /> 
         <AboutHeroSection />
         <HeroSection />
         <EventsSection /> 

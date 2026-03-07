@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`header-area bg-transparent position-relative z-2 ${isSticky ? "sticky" : ""}`}
+        className={`header-area position-relative z-2 ${isSticky ? "sticky" : ""}`}
         id="header"
       >
         <div className="header__navbar header__ai border-0">

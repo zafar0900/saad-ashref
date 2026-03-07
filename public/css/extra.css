@@ -611,6 +611,13 @@ p {
 .container.container--extend {
   background: #000 !important;
 }
+
+/* Exclude header from the black container rule */
+.header-area .container,
+.header-area .container--extend,
+.header-area .container.container--extend {
+  background: transparent !important;
+}
 h4.item__title {
   font-size: 18px !important;
 }
@@ -1707,3 +1714,4 @@ section.contact-area.inner-hero-area.section-padding-top-bottom {
  
 
 /* end project detailed page */
+
