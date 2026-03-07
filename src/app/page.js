@@ -38,6 +38,7 @@ import HeroMeanSection from "@/components/HeroSection/Hero";
 import AboutHeroSection from "@/components/AboutHeroSection/AboutHeroSection"; 
 import EventsSection from "@/components/EventsSection/EventsSection"; 
 import AwardHome from "../components/awardhome/AwardHome"
+import StepsSection from "@/components/StepsSection/StepsSection"
 
 import LightMode from "@/components/LightMode";
 import Prism from "@/components/Animated/HeroBackground/Background";
@@ -102,8 +103,9 @@ export default function Home() {
         <FunfactSection /> */}
 
         <ZService /> 
-        <PortfolioSection />
+        {/* <PortfolioSection /> */}
         <AwardHome />
+        <StepsSection />
          <ServiceSections/>
         
          <AboutMain/>
