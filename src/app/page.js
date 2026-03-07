@@ -39,6 +39,7 @@ import AboutHeroSection from "@/components/AboutHeroSection/AboutHeroSection";
 import EventsSection from "@/components/EventsSection/EventsSection"; 
 import AwardHome from "../components/awardhome/AwardHome"
 import StepsSection from "@/components/StepsSection/StepsSection"
+import ProjectsShowcase from "@/components/ProjectsShowcase/ProjectsShowcase"
 
 import LightMode from "@/components/LightMode";
 import Prism from "@/components/Animated/HeroBackground/Background";
@@ -102,7 +103,8 @@ export default function Home() {
         {/* <AboutSection />
         <FunfactSection /> */}
 
-        <ZService /> 
+        <ZService />
+        <ProjectsShowcase />
         {/* <PortfolioSection /> */}
         <AwardHome />
         <StepsSection />
