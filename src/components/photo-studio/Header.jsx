@@ -15,7 +15,7 @@ const Header = () => {
   const handleShow = () => setShow(true);
 
   return (
-    <> 
+    <>
       <header
         className={`header-area bg-transparent position-relative z-2 ${isSticky ? "sticky" : ""}`}
         id="header"
@@ -36,7 +36,7 @@ const Header = () => {
                         </Link>
                       </div>
 
-                      
+
 
 
                       <div className="text-end d-flex justify-content-start d-xl-none">
@@ -60,7 +60,7 @@ const Header = () => {
                               className={
                                 (menu?.subMenu?.length > 0 &&
                                   pathname === menu.link) ||
-                                menu.id === 0
+                                  menu.id === 0
                                   ? ""
                                   : ""
                               }
@@ -83,7 +83,7 @@ const Header = () => {
                                       }
                                     >
                                       <Link href={subMenuItem.link || "#0"}>
-                                        {subMenuItem.name} 
+                                        {subMenuItem.name}
                                       </Link>
                                     </li>
                                   ))}
@@ -92,8 +92,22 @@ const Header = () => {
                             </li>
                           ))}
                         </ul>
+                        <div className="tmp-header-right">
+                      <div className="header-contact-info d-none d-xl-flex">
+                        <div className="contact-item">
+                          <i className="fa-solid fa-location-dot brandcolor" />
+                          <span style={{ fontWeight: 700 }} className="brandcolor">Dubai Marina.</span>
+                        </div>
+                        <div className="contact-item">
+                          <i className="fa-solid fa-phone brandcolor" />
+                          <a href="tel:+971553486284" style={{ fontWeight: 700 }} className="brandcolor">+971 55 3486 284</a>
+                        </div>
+                      </div>
+                      
+                    </div>
                       </nav>
                     </div>
+                    
                     <div className="col-6 col-lg-0 col-xl-0 col-xxl-0 desktop-burger-menu">
                       <div className="header__main-menuBar justify-content-end">
                         Menu

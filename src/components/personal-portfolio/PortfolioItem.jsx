@@ -13,9 +13,9 @@ const PortfolioItem = ({ image, title, year, tags, revealAnimation, link }) => {
         </div>
         
       </figure>
-       
+        
     </div>
-  );
+  ); 
 };
 
 export default PortfolioItem;

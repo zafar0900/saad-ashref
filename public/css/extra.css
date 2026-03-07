@@ -716,6 +716,9 @@ a.common-btn__circle {
 .col-lg-7.padding {
   padding-right: 50px !important;
 }
+.about-badge {
+  color: #fff !important;
+}
 .lauxery {
   background-image:
   linear-gradient(90deg,
