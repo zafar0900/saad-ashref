@@ -98,13 +98,14 @@ export default function Home() {
         <AboutHeroSection />
         <HeroSection />
         <EventsSection /> 
-        <AboutSection />
-        <FunfactSection />
+        {/* <AboutSection />
+        <FunfactSection /> */}
 
         <ZService /> 
         <PortfolioSection />
+        <AwardHome />
          <ServiceSections/>
-         <AwardHome />
+        
          <AboutMain/>
          <BrandsSection />
          <Testimonialextra />

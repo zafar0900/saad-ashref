@@ -9,7 +9,7 @@ import useSticky from "@/Hook/useSticky";
 const Header = () => {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
-  const isSticky = useSticky();
+  const isSticky = useSticky(); 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,7 +30,7 @@ const Header = () => {
                       <div className="header__main-menuBtns text-start">
                         <Link href="/" className="header__topbar-logo">
                           <img
-                            src="/assets/images/white-logo.png"
+                            src="/logo.png"
                             alt="logo"
                           />
                         </Link>
