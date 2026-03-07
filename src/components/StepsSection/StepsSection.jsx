@@ -67,20 +67,30 @@ export default function StepsSection() {
     const len = path.getTotalLength();
     gsap.set([path, glow], { strokeDasharray: len, strokeDashoffset: len });
 
-    // Draw the line automatically when section enters view
+    // Looping line: draw over 2.2s, pause 2.8s, repeat — total cycle = 5s
     const lineTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 70%",
-        toggleActions: "play none none reverse",
-      },
+      repeat: -1,
+      repeatDelay: 2.8,
+      paused: true,
+      onRepeat: () => gsap.set([path, glow], { strokeDashoffset: len }),
     });
     lineTl.to([path, glow], {
       strokeDashoffset: 0,
       duration: 2.2,
       ease: "power2.inOut",
     });
-    storedTriggers.current.push(lineTl.scrollTrigger);
+
+    // Start loop when section enters view, pause when out
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: "top 70%",
+      end: "bottom top",
+      onEnter: () => lineTl.play(),
+      onLeaveBack: () => lineTl.pause(),
+      onLeave: () => lineTl.pause(),
+      onEnterBack: () => lineTl.play(),
+    });
+    storedTriggers.current.push(st);
 
     // Reveal each card with a staggered slide
     cardRefs.current.forEach((el, i) => {
@@ -109,7 +119,10 @@ export default function StepsSection() {
       storedTriggers.current.push(st);
     });
 
-    return () => storedTriggers.current.forEach((t) => t?.kill());
+    return () => {
+      lineTl.kill();
+      storedTriggers.current.forEach((t) => t?.kill());
+    };
   }, []);
 
   return (
