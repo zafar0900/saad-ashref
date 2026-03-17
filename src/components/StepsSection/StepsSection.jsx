@@ -68,17 +68,17 @@ export default function StepsSection() {
     gsap.set([path, glow], { strokeDasharray: len, strokeDashoffset: len });
 
     // Looping line: draw over 2.2s, pause 2.8s, repeat — total cycle = 5s
+    // fromTo makes each cycle explicitly start from full length (reliable reset)
     const lineTl = gsap.timeline({
       repeat: -1,
       repeatDelay: 2.8,
       paused: true,
-      onRepeat: () => gsap.set([path, glow], { strokeDashoffset: len }),
     });
-    lineTl.to([path, glow], {
-      strokeDashoffset: 0,
-      duration: 2.2,
-      ease: "power2.inOut",
-    });
+    lineTl.fromTo(
+      [path, glow],
+      { strokeDashoffset: len },
+      { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut" }
+    );
 
     // Start loop when section enters view, pause when out
     const st = ScrollTrigger.create({
@@ -332,14 +332,14 @@ export default function StepsSection() {
         }
         .sp-title {
           color: #fff;
-          font-size: 13.5px;
-          font-weight: 650;
+          font-size: 16.5px;
+          font-weight: 750;
           margin-bottom: 9px;
           line-height: 1.4;
         }
         .sp-desc {
           color: rgba(255, 255, 255, 0.38);
-          font-size: 12px;
+          font-size: 14px;
           line-height: 1.75;
           margin: 0;
         }

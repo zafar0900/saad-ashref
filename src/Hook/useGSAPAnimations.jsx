@@ -19,6 +19,9 @@ const useGSAPAnimations = () => {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
     gsap.config({ nullTargetWarn: false });
 
+    // Performance: skip callbacks when scroll hasn't moved enough to matter
+    ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true });
+
     const initAwardItemCursor = () => {
       const awardItems = document.querySelectorAll(".award__item");
       const imgCursorSelector = ".img-cursor";
@@ -37,7 +40,7 @@ const useGSAPAnimations = () => {
           setY(e.clientY);
         };
 
-        const startFollow = () => document.addEventListener("mousemove", align);
+        const startFollow = () => document.addEventListener("mousemove", align, { passive: true });
         const stopFollow = () =>
           document.removeEventListener("mousemove", align);
 
@@ -58,18 +61,6 @@ const useGSAPAnimations = () => {
           fade.reverse();
           stopFollow();
         });
-
-        return () => {
-          el.removeEventListener("mouseenter", (e) => {
-            fade.play();
-            startFollow();
-            align(e);
-          });
-          el.removeEventListener("mouseleave", () => {
-            fade.reverse();
-            stopFollow();
-          });
-        };
       });
     };
 
@@ -98,7 +89,7 @@ const useGSAPAnimations = () => {
           setY(e.clientY);
         };
 
-        const startFollow = () => document.addEventListener("mousemove", align);
+        const startFollow = () => document.addEventListener("mousemove", align, { passive: true });
         const stopFollow = () =>
           document.removeEventListener("mousemove", align);
 
@@ -250,43 +241,25 @@ const useGSAPAnimations = () => {
 
       if (elements.length > 0) {
         elements.forEach((element) => {
+          // Use transform on the element instead of backgroundPosition (GPU composited)
+          const setX = gsap.quickSetter(element, "x", "px");
+          const setY = gsap.quickSetter(element, "y", "px");
+
           element.addEventListener("mouseenter", (event) => {
             const rect = element.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            const bgX = (x / rect.width) * 80 - 40;
-            const bgY = (y / rect.height) * 80 - 40;
-
-            gsap.to(element, {
-              duration: 0.6,
-              ease: "power2.out",
-              backgroundPosition: `${bgX}px ${bgY}px`,
-            });
-          });
+            setX((event.clientX - rect.left - rect.width / 2) * 0.08);
+            setY((event.clientY - rect.top - rect.height / 2) * 0.08);
+          }, { passive: true });
 
           element.addEventListener("mousemove", (event) => {
             const rect = element.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            setX((event.clientX - rect.left - rect.width / 2) * 0.12);
+            setY((event.clientY - rect.top - rect.height / 2) * 0.12);
+          }, { passive: true });
 
-            const bgX = (x / rect.width) * 400 - 200;
-            const bgY = (y / rect.height) * 400 - 200;
-
-            gsap.to(element, {
-              duration: 0.3,
-              backgroundPosition: `${bgX}px ${bgY}px`,
-            });
-          });
-
-          // On mouse leave
           element.addEventListener("mouseleave", () => {
-            gsap.to(element, {
-              duration: 1,
-              ease: "power2.inOut",
-              backgroundPosition: "center",
-            });
-          });
+            gsap.to(element, { x: 0, y: 0, duration: 0.8, ease: "power2.out" });
+          }, { passive: true });
         });
       }
     };
@@ -812,29 +785,25 @@ const useGSAPAnimations = () => {
     };
 
     const initButtonHoverAnimations = () => {
-      // Button hover effect with span positioning
+      // Button hover effect — use transform instead of top/left (GPU composited)
       const buttons = document.querySelectorAll(".btn-hover");
 
       buttons.forEach((button) => {
         const span = button.querySelector("span");
-
         if (!span) return;
+
+        const setX = gsap.quickSetter(span, "x", "px");
+        const setY = gsap.quickSetter(span, "y", "px");
 
         const handleMouseMove = (e) => {
           const rect = button.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          gsap.to(span, {
-            top: y,
-            left: x,
-            duration: 0,
-          });
+          setX(e.clientX - rect.left);
+          setY(e.clientY - rect.top);
         };
 
-        button.addEventListener("mouseenter", handleMouseMove);
-        button.addEventListener("mousemove", handleMouseMove);
-        button.addEventListener("mouseout", handleMouseMove);
+        button.addEventListener("mouseenter", handleMouseMove, { passive: true });
+        button.addEventListener("mousemove", handleMouseMove, { passive: true });
+        button.addEventListener("mouseout", handleMouseMove, { passive: true });
       });
 
       // Button parallax effect
@@ -875,8 +844,6 @@ const useGSAPAnimations = () => {
       });
     };
     const initAllAnimations = () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-      gsap.killTweensOf("*");
       initAwardItemCursor();
       initPortfolioCursorAnimation();
       initFadeAnimations();
@@ -904,7 +871,6 @@ const useGSAPAnimations = () => {
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
-      gsap.killTweensOf("*");
     };
   }, [pathname]);
 };

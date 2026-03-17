@@ -53,14 +53,10 @@ export default function About1() {
           <div>
             <span className="about-badge">About Me</span>
 
-            <h2 className="about-title lauxery">Mobile App Development Dubai</h2>
+            <h2 className="about-title lauxery">Most Professional Freelance Web Designer UAE</h2>
 
             <p className="about-text">
-              Being an Expert App Developer in Dubai, I have worked with
-              high-profile organizations including Etihad Towers, Hamdan Sports
-              Complex, Yahoo, Jumeirah, and Fujairah Government. These
-              collaborations reflect my ability to deliver advanced, reliable,
-              and tailored mobile applications.Yahoo, Jumeirah, and Fujairah Government. These collaborations reflect my ability to deliver advanced, reliable, and tailored mobile applications
+            As a Dubai Web Designer, I created fully functional websites. These websites have established businesses with strong online presence. I can easily grow a startup, small business, or an established enterprise. My skills places the website on the top in the competitive market. A professional Website Designer in Dubai has years of experience in designing SEO-optimized websites. My goal is to enhance your brand’s digital identity. I created attractive web designs, e-commerce websites, SEO, and website maintenance services. 
             </p>
 
             <Facts2 />

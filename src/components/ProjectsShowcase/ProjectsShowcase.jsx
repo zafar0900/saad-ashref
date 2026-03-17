@@ -15,9 +15,9 @@ const projects = [
     number: "01",
     year: "2024",
     category: "Branding · Web Design",
-    title: "YSM Real Estate",
+    title: "Tale of Star",
     desc: "Full brand identity system and digital presence for a premium Dubai real estate firm — from logo creation to a high-converting property website.",
-    image: "/assets/project/YSM Real Estate by saad design.jpg",
+    image: "/assets/project/taleofstar-saaddesign.gif",
     link: "/ysm-real-estate",
   },
   {

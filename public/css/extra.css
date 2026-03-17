@@ -25,6 +25,9 @@ h h3.section__title.hero-text.text-left {
   height: 400px !important;
 }
 
+/* div#home {
+  height: 80vh !important;
+} */
 section#about-4 {
   padding-top: 20px !important;
 }
@@ -951,7 +954,7 @@ p.sub-title {
 button.common-btn {
   margin-bottom: 10px !important;
   background: #000 !important;
-  border-color: #000 !important;
+  border-color: #edb323 !important;
 }
 
 .input-group {

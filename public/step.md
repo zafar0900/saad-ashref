@@ -1,44 +1,26 @@
-Create a modern React "Projects Showcase" section with smooth scroll animation similar to premium portfolio websites.
+I have built a React landing page with many scroll animations, but the scrolling feels laggy and not smooth. The animations stutter while scrolling.
 
-Tech stack:
-
-* React (functional components)
-* GSAP with ScrollTrigger
-* Lenis for smooth scrolling
-* CSS or Tailwind for styling
+Please optimize the page for smooth scrolling and high performance.
 
 Requirements:
 
-* The section should have a blue background.
-* Display multiple project cards stacked on top of each other.
-* Each card should contain:
+* Identify and fix performance issues causing scroll lag.
+* Optimize animations to use GPU accelerated properties such as transform and opacity instead of top/left.
+* Reduce unnecessary React re-renders.
+* Implement smooth scrolling using Lenis or a similar modern smooth scroll library.
+* If GSAP is used, optimize ScrollTrigger settings and avoid heavy calculations during scroll.
+* Lazy load images and optimize large assets.
+* Use requestAnimationFrame for animations when needed.
+* Avoid layout thrashing and expensive DOM operations during scroll.
 
-  * Project number
-  * Year and category
-  * Project title
-  * Short description
-  * "View Case Study" button
-  * Right side preview image
+React specific optimizations:
 
-Animation behavior:
+* Use memoization where needed (React.memo, useMemo, useCallback).
+* Avoid unnecessary state updates during scroll.
+* Use passive event listeners for scroll events.
 
-* Cards should appear stacked with slight offsets behind each other.
-* When the user scrolls, the top card should smoothly slide upward revealing the next card.
-* The section should use a sticky scroll animation where cards animate while the user scrolls.
-* Use GSAP ScrollTrigger to control animations.
-* Use Lenis for smooth scrolling.
-
-Design:
-
-* Rounded cards with soft shadows
-* Clean typography
-* Modern SaaS/agency style
-* Responsive layout (desktop, tablet, mobile)
+Goal:
+The landing page should scroll smoothly at 60fps with modern smooth animations similar to premium agency websites.
 
 Output:
-Provide a complete React component including:
-
-* JSX
-* CSS or Tailwind styles
-* GSAP + ScrollTrigger implementation
-* Lenis smooth scroll setup
+Provide optimized React code and explain the changes needed to improve scroll performance.

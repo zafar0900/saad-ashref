@@ -35,7 +35,7 @@ import ServicesAI from "@/components/ai-consulting/Services";
 import ZService from "@/components/zcomponent/zservice/Zservice"
 import ServiceSections from "@/components/personal-portfolio/ServiceSection"; 
 import HeroMeanSection from "@/components/HeroSection/Hero"; 
-import AboutHeroSection from "@/components/AboutHeroSection/AboutHeroSection"; 
+import AboutHeroSection from "@/components/AboutHeroSection/AboutHeroSection";  
 import EventsSection from "@/components/EventsSection/EventsSection"; 
 import AwardHome from "../components/awardhome/AwardHome"
 import StepsSection from "@/components/StepsSection/StepsSection"
@@ -64,7 +64,7 @@ export default function Home() {
     <>
       <div style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Prism background behind header + hero */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        {/* <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
           <Prism
             animationType="rotate"
             timeScale={0.3}
@@ -76,7 +76,7 @@ export default function Home() {
             noise={0}
             glow={1}
           />
-        </div>
+        </div> */}
         {/* Gradient fade at the bottom into the next section */}
         <div style={{
           position: 'absolute',

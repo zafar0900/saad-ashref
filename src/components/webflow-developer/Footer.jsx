@@ -102,20 +102,21 @@ const Footer = () => {
                         <div className="digital-contacts">
                           <ul>
                             <li className="number_footer" >
-                              +971 55 348 6284
+                            +971 55 3486 284
                             </li>
                             <li  className="sylefooter">
                               <Link
-                                href="mailto:Saad@saaddesign.ae "
+                                href="mailto:saad@saadashraf.net "
                                 className=" sylefooter"
                               >
-                                Saad@saaddesign.ae 
+                                saad@saadashraf.net
                               </Link>
                             </li>
                           </ul>
                         </div>
                         <div className="sylefooter">
-                          <p>#821, Building 2, Bay Square, Business Bay, Dubai.</p>
+                          <p>Level 8, Bay Square, Business Bay,
+                          Dubai, UAE.</p>
                         </div>
 
 

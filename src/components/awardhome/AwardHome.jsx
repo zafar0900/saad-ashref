@@ -127,7 +127,7 @@ function ServiceSection() {
                                             <div className="col-md-12 imagesport">
                                                 <div className="portfolio-card">
 
-                                                    <h3 className="title">SaadAshraf.net</h3>
+                                                    <h3 className="lauxery ">SaadAshraf.net</h3>
 
                                                     <div className="subtitle">
                                                         Designer | Websites | Mobile Apps | Digital Marketing | Business Development
@@ -170,7 +170,7 @@ function ServiceSection() {
                                             <div className="col-md-12 imagesport">
                                                 <div className="portfolio-card">
 
-                                                    <h3 className="title">MintTwist - UAE & UK
+                                                    <h3 className="lauxery">MintTwist - UAE & UK
                                                     </h3>
 
                                                     <div className="subtitle">
@@ -200,7 +200,7 @@ function ServiceSection() {
                                             <div className="col-md-12 imagesport">
                                                 <div className="portfolio-card">
 
-                                                    <h3 className="title">Flagship Projects - Dubai Media City
+                                                    <h3 className="lauxery">Flagship Projects - Dubai Media City
                                                     </h3>
 
                                                     <div className="subtitle">
@@ -231,7 +231,7 @@ function ServiceSection() {
                                             <div className="col-md-12 imagesport">
                                                 <div className="portfolio-card">
 
-                                                    <h3 className="title">Lotus Educational Institute - Dubai Knowledge Village
+                                                    <h3 className="lauxery">Lotus Educational Institute - Dubai Knowledge Village
                                                     </h3>
 
                                                     <div className="subtitle">
@@ -252,7 +252,7 @@ function ServiceSection() {
                                             <div className="col-md-12 imagesport">
                                                 <div className="portfolio-card">
 
-                                                    <h3 className="title">Arbico Computers
+                                                    <h3 className="lauxery">Arbico Computers
                                                     </h3>
 
                                                     <div className="subtitle">
@@ -277,7 +277,7 @@ function ServiceSection() {
                                             <div className="col-md-12 imagesport">
                                                 <div className="portfolio-card">
 
-                                                    <h3 className="title">Wiztech
+                                                    <h3 className="lauxery">Wiztech
                                                     </h3>
 
                                                     <div className="subtitle">
@@ -327,12 +327,7 @@ function ServiceSection() {
 /* main box */
 .portfolio-card{
   position:relative;
-  background:linear-gradient(90deg,
-    #f0b02c 0%,
-    #e4a626 20%,
-    #e79a32 45%,
-    #f0b02c 60%,
-    #f0b02c 100%),
+   
   linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);;
   border:1px solid #f0b02c;
   padding:30px 35px;
@@ -374,7 +369,7 @@ function ServiceSection() {
 
 .subtitle{
   font-size:14px;
-  color:#3f5f7a;
+  color:#fff;
   margin-bottom:15px;
 }
 
@@ -391,8 +386,9 @@ function ServiceSection() {
 
 .work-list li{
   font-size:14px;
-  color:#5e6f7f;
+   
   margin-bottom:6px;
+  font-size:16px;
 }
 
 /* orange highlighted names */
@@ -411,8 +407,11 @@ function ServiceSection() {
 
   .title{
     font-size:18px;
+    
   }
-
+    h3.title {
+    color:#5e6f7f;
+    }
   .subtitle{
     font-size:13px;
   }
@@ -444,7 +443,7 @@ function ServiceSection() {
   width: 100px;
   height: 100px;
 //   background: #ff5a52;
- border: 2px dotted #f0b02c;
+ border: 3px solid #f0b02c;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -469,6 +468,8 @@ function ServiceSection() {
   transform: scale(1.05);
   transition: 0.3s;
   background: #f0b02c;
+  box-shadow: 0 0 10px #f0b02c, 0 0 20px #f0b02c;
+
 }
 
  

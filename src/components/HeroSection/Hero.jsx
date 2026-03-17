@@ -75,6 +75,7 @@ export default function Hero2({ light = false }) {
         <div className="banner-one-main-wrapper">
           <div className="row marginTop">
             <div className="col-lg-7 order-lg-1 padding">
+            <Link href='https://maps.app.goo.gl/whxtCEsJn14GcDoP6'>
               <div className="tmp-scroll-trigger tmp-fade-in animation-order-1 google-rating-badge style1">
                 <div className="svg_image1">
                   <svg
@@ -125,26 +126,21 @@ export default function Hero2({ light = false }) {
                   <span className="reviews-text svg_image18">500+ Reviews</span>
                 </div>
               </div>
-              <div className="inner">
+              </Link>
+              <div className="inner"> 
                 <span className="hero-title custom_title tmp-scroll-trigger tmp-fade-in animation-order-2  ">
-                  Hello, I'm Saad,
+                  Hello, I'm Saad Ashraf,
                 </span>
                 <h1 className="hero-title    lauxery tmp-scroll-trigger tmp-fade-in animation-order-2">
-                  App Developer in Dubai
+                  Web Designer Dubai
                 </h1>
 
                 <p className="disc tmp-scroll-trigger tmp-fade-in animation-order-3 svg_image19">
-                  Thank you for visiting my website. I have been a dedicated
-                  mobile app developer in Dubai since 2006 and have collaborated
-                  with some of the UAE's top brands, including Dubai Tourism,
-                  Atlantis, and Hamdan Sports Complex.
+                  A senior-level Web Developer with international experience. Proving consistently successful, effective websites, business, and project delivery skills. Over 18 years of experience working and collaborating with specialist Advertising & Brand agencies throughout the Middle East and Europe. An accomplished communicator with superior analytical and problem-solving skills, and an unrivaled knowledge of Website Development and Web Marketing. A natural networker and presenter with a dynamic presence, and the confidence and enthusiasm to drive businesses forward, recognize new opportunities and technologies, and to manage, develop and build relationships at all levels.
+
                 </p>
-                <p className="disc tmp-scroll-trigger tmp-fade-in animation-order-3 svg_image19">
-                  Thank you for visiting my website. I have been a dedicated
-                  mobile app developer in Dubai since 2006 and have collaborated
-                  with some of the UAE's top brands, including Dubai Tourism,
-                  Atlantis, and Hamdan Sports Complex.
-                </p>
+                
+                
                 <div className="tmp-scroll-trigger tmp-fade-in animation-order-4 svg_image20">
                   <div className="svg_image21">
                     {/* ⭐ Green list like image */}
@@ -176,7 +172,7 @@ export default function Hero2({ light = false }) {
                 </h3>
                 <form className="contact__form">
                   <div className="row g-4">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <div className="input-group">
                         <input
                           type="text"
@@ -187,7 +183,7 @@ export default function Hero2({ light = false }) {
                       </div>
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <div className="input-group">
                         <input
                           type="email"
@@ -220,7 +216,7 @@ export default function Hero2({ light = false }) {
                     </div>
 
                     <div className="col-12">
-                      <button className="common-btn">Send Message</button>
+                      <button className="common-btn design">Send Message</button>
                     </div>
                   </div>
                 </form>
