@@ -1,527 +1,639 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-
-
-
-function ServiceSection() {
-
-    const categories = [
-        {
-            id: 1,
-            icon: "/assets/portfolio/cheval.webp",
-            label: "2012",
-            event: "Present"
-        },
-        {
-            id: 2,
-            icon: "/assets/portfolio/mobile-app-category.webp",
-            label: "2010-2012",
-            event: "3 Years"
-        },
-        {
-            id: 3,
-            icon: "/assets/portfolio/e-commerce-category.webp",
-            label: "2008-2010",
-            event: "2 Years"
-        },
-        {
-            id: 4,
-            icon: "/assets/portfolio/website-dev-category.webp",
-            label: "2007-2008",
-            event: "1 Year"
-        },
-        {
-            id: 5,
-            icon: "/assets/portfolio/download-removebg-preview.png",
-            label: "2005-2006",
-            event: "1 Year"
-        },
-        {
-            id: 6,
-            icon: "/assets/portfolio/download__1_-removebg-preview.png",
-            label: "2004-2005",
-            event: "1 Year"
-        }
-    ];
-
-    const [activeCategory, setActiveCategory] = useState(categories[0]?.id);
-    const [hoveredCategory, setHoveredCategory] = useState(null);
-    const [isHovered, setIsHovered] = useState(false);
-    const [arrowX, setArrowX] = useState(null);
-    const categoriesRef = useRef(null);
-    const circleRefs = useRef({});
-
-    const updateArrow = (id) => {
-        const circleEl = circleRefs.current[id];
-        const containerEl = categoriesRef.current;
-        if (!circleEl || !containerEl) return;
-        const circleRect = circleEl.getBoundingClientRect();
-        const containerRect = containerEl.getBoundingClientRect();
-        const center = circleRect.left + circleRect.width / 2 - containerRect.left;
-        setArrowX(center);
-    };
-
-    // Measure after first paint so there's no jump from 0 to real position
-    useEffect(() => {
-        if (activeCategory) {
-            requestAnimationFrame(() => updateArrow(activeCategory));
-        }
-    }, []);
-
-    const handleCategoryClick = (id) => {
-        const next = activeCategory === id ? null : id;
-        setActiveCategory(next);
-        if (next) updateArrow(next);
-    };
-
-    return (
-        <>
-            <div className="section portfolio">
-                <div className="container portfoliolisting">
-                    <div className="d-flex flex-column justify-content-center text-center gspace-5">
-
-                        <div className="card-service-wrapper">
-                            <div className="row">
-                                <div className="col-lg-12 col-xl-12">
-                                    <div className="section__header text-center">
-                                        <h3 className="luxury-heading bottomluxury">
-                                           Our work exprience
-                                        </h3>
-
-                                    </div>
-                                </div>
-                                <div className="categories" ref={categoriesRef}>
-                                    {categories.map((cat) => (
-                                        <div
-                                            key={cat.id}
-                                            ref={(el) => { circleRefs.current[cat.id] = el; }}
-                                            className={`category-item col-md-2 ${activeCategory === cat.id ? "active" : ""}`}
-                                            onClick={() => handleCategoryClick(cat.id)}
-                                        >
-                                            <div className="circle">
-                                                <h5>{cat.label}</h5>
-                                                <span>{cat.event}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Animated arrow pointing at active circle */}
-                                <div className="arrow-track">
-                                    <div
-                                        className={`animated-arrow ${activeCategory && arrowX !== null ? "arrow-visible" : ""}`}
-                                        style={{ transform: `translateX(calc(${arrowX ?? 0}px - 50%))` }}
-                                    />
-                                </div>
-                            </div>
-
-
-
-                            <div className="row   grid-spacer-2">
-
-                                <div className="col-md-12">
-                                    {(!activeCategory || activeCategory === 1) && (
-                                        <div className="row portfolio-scroll" id="web-design">
-                                            <div className="col-md-12 imagesport">
-                                                <div className="portfolio-card">
-
-                                                    <h3 className="lauxery ">SaadAshraf.net</h3>
-
-                                                    <div className="subtitle">
-                                                        Designer | Websites | Mobile Apps | Digital Marketing | Business Development
-                                                    </div>
-
-                                                    <p className="desc">
-                                                        I'm enjoying working with Creative/Digital Agencies as a Senior Web Developer/Technical Director.
-                                                        Usually agencies provides complete requirement from client to me and then I manage from my end to
-                                                        deliver the project. Sometime, We also meet clients to discuss and understand the requirement and
-                                                        to provide training on how to use CMS. I feel lucky that I got opportunities to work with some of
-                                                        prestigious clients such as:
-                                                    </p>
-
-                                                    <ol className="work-list">
-                                                        <li><span>1. Etihad Towers, Abu Dhabi</span> Website Development English & Arabic</li>
-                                                        <li><span>2. Al Zahia Holding Company</span> Website Development</li>
-                                                        <li><span>3. Yanbu Steel - Saudia Arabia</span> Build Corporate Website</li>
-                                                        <li><span>4. eXtra - Saudia Arabia</span> Proposing E-Commerce Website + Mobile App</li>
-                                                        <li><span>5. Atlantis</span> Aquaventure</li>
-                                                        <li><span>6. Beeah School of Environment</span> Online Portal between Students & Teachers</li>
-                                                        <li><span>7. Palm Jumeirah</span> Virtual Tour for Tiara Residence</li>
-                                                        <li><span>8. Beeah School of Environment</span> Online Portal between Students & Teachers</li>
-                                                        <li><span>9. NDK Pizza</span> Managing iOS App</li>
-                                                        <li><span>10. Floor World</span> Managing E-Commerce Website with 3rd Party Inventory Software</li>
-                                                        <li><span>11. Emirates Hills</span> Virtual Tour for Villa</li>
-                                                        <li><span>12. Jumeirah South Villa</span> Virtual Tour for Properties</li>
-                                                        <li><span>13, Al Barari Luxury Villa</span> Virtual Tour for Properties</li>
-                                                        <li><span>14, Palm Jumeirah</span> Virtual Tour for Tiara Residence</li>
-                                                    </ol>
-
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-                                    )}
-                                    {(!activeCategory || activeCategory === 2) && (
-                                        <div className="row portfolio-scroll" id="mobile-app">
-                                            <div className="col-md-12 imagesport">
-                                                <div className="portfolio-card">
-
-                                                    <h3 className="lauxery">MintTwist - UAE & UK
-                                                    </h3>
-
-                                                    <div className="subtitle">
-                                                        Project Manager for MENA Region
-                                                    </div>
-
-                                                    <p className="desc">
-                                                        MintTwist headoffice based in London, UK. MT hired me as a Project Manager to manage all the projects from Middle East. While working MT I got excellent opportunity to work some of very big clients plus I leared alot about Digital Marketing.
-                                                    </p>
-
-                                                    <ol className="work-list">
-                                                        <li><span>1. Abu Dhabi Men's College</span> 1 Week Consultancy + RFP for New Website Designing</li>
-                                                        <li><span>2. Grand Hyatt Muscat - Oman</span> Build iOS Application</li>
-                                                        <li><span>3. Government Summit from Dubai Holding</span> Managing Existing Website</li>
-                                                        <li><span>4. Yanbu Steel - Saudia Arabia</span> Build Corporate Website</li>
-                                                        <li><span>5. eXtra - Saudia Arabia</span> Proposing E-Commmerce Website + Mobile App</li>
-                                                        <li><span>6. Bin Hendi</span> Building Corporate Website</li>
-                                                    </ol>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    )}
-                                    {(!activeCategory || activeCategory === 3) && (
-                                        <div className="row portfolio-scroll" id="Ecommerce">
-                                            <div className="col-md-12 imagesport">
-                                                <div className="portfolio-card">
-
-                                                    <h3 className="lauxery">Flagship Projects - Dubai Media City
-                                                    </h3>
-
-                                                    <div className="subtitle">
-                                                        Senior Website Designer Dubai
-                                                    </div>
-
-                                                    <p className="desc">
-                                                        I was hired for His Highness Sheikh Majid Bin Mohammed private office to manage official Website however after providing excellent solution to Private Office of His Highess, I got opportunity to work on some other prestigious projects such as:
-                                                    </p>
-
-                                                    <ol className="work-list">
-                                                        <li><span>1. His Highness Sheikh Maktoum Bin Mohammed</span> for designing a Website Layout</li>
-                                                        <li><span>2. Etisalat - More Mondays Rewards</span> Build Etisalat Program 'More Mondays' Website</li>
-                                                        <li><span>3. Etisalat - More Mondays Rewards</span> Email Marketing Campaign</li>
-                                                        <li><span>4. Dubai Public Prosecution</span> iPhone Application with the integration of there existing system</li>
-                                                    </ol>
-
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-
-                                    )}
-                                    {(!activeCategory || activeCategory === 4) && (
-                                        <div className="row portfolio-scroll" id="SEO">
-                                            <div className="col-md-12 imagesport">
-                                                <div className="portfolio-card">
-
-                                                    <h3 className="lauxery">Lotus Educational Institute - Dubai Knowledge Village
-                                                    </h3>
-
-                                                    <div className="subtitle">
-                                                        Web Developer & Instruture
-                                                    </div>
-
-                                                    <p className="desc">
-                                                        Building & Managing Institue Websites. Providing Website Training to International Students.
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    )}
-                                    {(!activeCategory || activeCategory === 5) && (
-                                        <div className="row portfolio-scroll" id="ppc">
-                                            <div className="col-md-12 imagesport">
-                                                <div className="portfolio-card">
-
-                                                    <h3 className="lauxery">Arbico Computers
-                                                    </h3>
-
-                                                    <div className="subtitle">
-                                                        Gaming Computers Dristributors in UK
-
-                                                    </div>
-
-                                                    <p className="desc">
-                                                        Web Designer - Managing E-Commerce Websites for updates, reporting and managing eBay Channels.
-
-                                                    </p>
-
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {(!activeCategory || activeCategory === 6) && (
-
-                                        <div className="row portfolio-scroll" id="digital-market">
-                                            <div className="col-md-12 imagesport">
-                                                <div className="portfolio-card">
-
-                                                    <h3 className="lauxery">Wiztech
-                                                    </h3>
-
-                                                    <div className="subtitle">
-                                                        Software House
-
-                                                    </div>
-
-                                                    <p className="desc">
-                                                        Started my career with Wiztech. My first website I ever build was for Education Institute.
-
-                                                    </p>
-
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    )}
-
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
+import React, { useState } from "react";
+import Image from "next/image";
+
+const experiences = [
+  {
+    id: 1,
+    period: "2012 – Present",
+    duration: "12+ Years",
+    company: "SaadAshraf.net",
+    role: "Senior Web Developer / Technical Director",
+    desc: "Working with Creative/Digital Agencies as Senior Web Developer and Technical Director. Agencies provide complete client requirements, and I manage end-to-end delivery — including CMS training and client-facing meetings.",
+    image: "/assets/expriecntimage/logo2.png",
+    clients: [
+      "Etihad Towers, Abu Dhabi — Website (English & Arabic)",
+      "Al Zahia Holding Company — Website Development",
+      "Yanbu Steel, Saudi Arabia — Corporate Website",
+      "eXtra, Saudi Arabia — E-Commerce + Mobile App",
+      "Atlantis Aquaventure",
+      "Beeah School of Environment — Online Student Portal",
+      "Palm Jumeirah — Virtual Tour, Tiara Residence",
+      "NDK Pizza — iOS App Management",
+      "Floor World — E-Commerce + Inventory Integration",
+      "Emirates Hills — Virtual Tour for Villa",
+      "Jumeirah South Villa — Property Virtual Tours",
+      "Al Barari Luxury Villa — Property Virtual Tours",
+    ],
+  },
+  {
+    id: 2,
+    period: "2010 – 2012",
+    duration: "3 Years",
+    company: "MintTwist",
+    role: "Project Manager, MENA Region",
+    desc: "London-headquartered digital agency. Hired to manage all Middle East projects and gained deep exposure to digital marketing while working with some of the region's most prestigious clients.",
+    image: "/assets/expriecntimage/MintTwist.png",
+    clients: [
+      "Abu Dhabi Men's College — Consultancy + RFP",
+      "Grand Hyatt Muscat, Oman — iOS Application",
+      "Government Summit, Dubai Holding — Website Management",
+      "Yanbu Steel, Saudi Arabia — Corporate Website",
+      "eXtra, Saudi Arabia — E-Commerce + Mobile App",
+      "Bin Hendi — Corporate Website",
+    ],
+  },
+  {
+    id: 3,
+    period: "2008 – 2010",
+    duration: "2 Years",
+    company: "Flagship Projects",
+    role: "Senior Website Designer · Dubai Media City",
+    desc: "Hired for HH Sheikh Majid Bin Mohammed's private office to manage the official website. Outstanding delivery led to further opportunities on high-profile government and enterprise projects.",
+    image: "/assets/expriecntimage/Flagship-2CI.png",
+    clients: [
+      "HH Sheikh Maktoum Bin Mohammed — Website Layout Design",
+      "Etisalat 'More Mondays Rewards' — Website Build",
+      "Etisalat — Email Marketing Campaign",
+      "Dubai Public Prosecution — iPhone Application",
+    ],
+  },
+  {
+    id: 4,
+    period: "2007 – 2008",
+    duration: "1 Year",
+    company: "Lotus Educational Institute",
+    role: "Web Developer & Instructor · Dubai Knowledge Village",
+    desc: "Built and maintained institute websites while delivering professional web development training to international students enrolled at Dubai Knowledge Village.",
+    image: "/assets/expriecntimage/Lotuss.png",
+    clients: [],
+  },
+  {
+    id: 5,
+    period: "2005 – 2006",
+    duration: "1 Year",
+    company: "Arbico Computers",
+    role: "Web Designer · UK",
+    desc: "Managed e-commerce websites for a gaming computer distributor in the UK — covering content updates, performance reporting, and eBay channel management.",
+    image: "/assets/expriecntimage/Arbico.jpg",
+    clients: [],
+  },
+  {
+    id: 6,
+    period: "2004 – 2005",
+    duration: "1 Year",
+    company: "Wiztech",
+    role: "Junior Web Designer · Software House",
+    desc: "Where it all began. Built my very first website for an education institute — marking the start of a 20+ year journey in digital design and development.",
+    image: "/assets/expriecntimage/Wiztech.png",
+    clients: [],
+  },
+];
+
+export default function AwardHome() {
+  const [active, setActive] = useState(0);
+  const current = experiences[active];
+
+  const handleSelect = (index) => {
+    if (index === active) return;
+    setActive(index);
+  };
+
+  return (
+    <section className="aw-section">
+
+      {/* ── Dynamic background image ── */}
+      {experiences.map((exp, i) => (
+        <div
+          key={exp.id}
+          className={`aw-bg ${i === active ? "aw-bg--visible" : ""}`}
+        >
+          <Image
+            src={exp.image}
+            alt={exp.company}
+            fill
+            className="aw-bg-img"
+            sizes="100vw"
+            priority={i === 0}
+          />
+        </div>
+      ))}
+
+      {/* Dark overlay */}
+      <div className="aw-overlay" aria-hidden="true" />
+
+      <div className="aw-inner">
+
+        {/* ── SECTION HEADING ── */}
+        <div className="aw-section-header">
+          <div className="aw-eyebrow">
+            <span className="aw-ey-rule" />
+            <span className="aw-ey-label">Career Journey</span>
+            <span className="aw-ey-rule" />
+          </div>
+          <h2 className="aw-main-heading lauxery">Work Experience</h2>
+          <p className="aw-main-sub">Two decades of digital craftsmanship across the UAE, UK, and beyond.</p>
+        </div>
+
+        {/* ── BOTTOM SPLIT ── */}
+        <div className="aw-split">
+
+          {/* ── LEFT — full experience content ── */}
+          <div className="aw-left">
+            <div key={active} className="aw-content-wrap">
+
+              <div className="aw-meta-row">
+                <span className="aw-badge">
+                  <span className="aw-badge-dot" aria-hidden="true" />
+                  {current.period}
+                </span>
+                <span className="aw-duration-pill">{current.duration}</span>
+              </div>
+
+              <h3 className="aw-company lauxery">{current.company}</h3>
+
+              <p className="aw-role">{current.role}</p>
+
+              <p className="aw-desc">{current.desc}</p>
+
+              {current.clients.length > 0 && (
+                <div className="aw-clients-block">
+                  <p className="aw-clients-label">Notable Clients</p>
+                  <ul className="aw-clients">
+                    {current.clients.map((c, i) => (
+                      <li key={i}>{c}</li>
+                    ))}
+                  </ul>
                 </div>
+              )}
 
+            </div>
+          </div>
 
-                <style jsx>{`
-        .categories {
+        {/* ── RIGHT — experience cards ── */}
+        <div className="aw-cards-wrap">
+          <div className="aw-cards">
+            {experiences.map((exp, i) => (
+              <button
+                key={exp.id}
+                className={`aw-card ${i === active ? "aw-card--active" : ""}`}
+                onClick={() => handleSelect(i)}
+              >
+                <div className="aw-card-thumb">
+                  <Image
+                    src={exp.image}
+                    alt={exp.company}
+                    fill
+                    className="aw-card-img"
+                    sizes="120px"
+                  />
+                  <div className="aw-card-thumb-overlay" />
+                </div>
+                <div className="aw-card-info">
+                  <span className="aw-card-company">{exp.company}</span>
+                  <span className="aw-card-period">{exp.period}</span>
+                  <span className="aw-card-duration">{exp.duration}</span>
+                </div>
+                {i === active && <span className="aw-card-active-dot" aria-hidden="true" />}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        </div> {/* closes aw-split */}
+
+      </div> {/* closes aw-inner */}
+
+      <style jsx>{`
+        /* ── Section ── */
+        .aw-section {
+          position: relative;
+          min-height: 100vh;
           display: flex;
-        //   flex-direction: column;
           align-items: center;
-          justify-content: center;
-          gap: 20px;
-          margin-bottom:20px ;
+          overflow: hidden;
+          background: #07070a;
         }
- .luxury-heading.bottomluxury{
- margin-bottom:20px !important}
- .imagesport{
-  padding:20px;
-}
 
-/* main box */
-.portfolio-card{
-  position:relative;
-   
-  linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.0) 35%);;
-  border:1px solid #f0b02c;
-  padding:30px 35px;
-  text-align:left !important;
-  
-}
+        /* ── Background images ── */
+        .aw-bg {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transition: opacity 0.7s ease;
+          z-index: 0;
+        }
+        .aw-bg--visible {
+          opacity: 1;
+        }
+        .aw-bg-img {
+          object-fit: cover;
+          object-position: center;
+        }
 
-/* animated arrow track */
-.arrow-track {
-  position: relative;
-  height: 24px;
-  margin-bottom: 4px;
-}
+        /* ── Dark gradient overlay ── */
+        .aw-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to right,
+            rgba(7, 7, 10, 0.97) 0%,
+            rgba(7, 7, 10, 0.88) 45%,
+            rgba(7, 7, 10, 0.55) 100%
+          );
+          z-index: 1;
+        }
 
-.animated-arrow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 18px solid #f0b02c;
-  opacity: 0;
-  will-change: transform;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
-}
+        /* ── Inner layout ── */
+        .aw-inner {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 80px 48px 90px;
+          display: flex;
+          flex-direction: column;
+          gap: 56px;
+        }
 
-.animated-arrow.arrow-visible {
-  opacity: 1;
-}
+        /* ── Section heading block ── */
+        .aw-section-header {
+          text-align: center;
+        }
 
-.title{
-  font-size:20px;
-  font-weight:700;
-  color:#2c4e6b;
-  margin-bottom:6px;
-}
+        .aw-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          margin-bottom: 20px;
+        }
 
-.subtitle{
-  font-size:14px;
-  color:#fff;
-  margin-bottom:15px;
-}
+        .aw-ey-rule {
+          display: block;
+          width: 36px;
+          height: 1px;
+          background: linear-gradient(to right, transparent, #f0b02c);
+          opacity: 0.55;
+        }
+        .aw-ey-rule:last-child {
+          background: linear-gradient(to left, transparent, #f0b02c);
+        }
 
-.desc{
-  font-size:14px;
-  color:#5e6f7f;
-  line-height:1.7;
-  margin-bottom:15px;
-}
+        .aw-ey-label {
+          font-size: 10.5px;
+          font-weight: 700;
+          letter-spacing: 4.5px;
+          text-transform: uppercase;
+          color: #f0b02c;
+        }
 
-.work-list{
-  padding-left:0px !important;
-}
+        .aw-main-heading {
+          color: #fff;
+          font-size: clamp(36px, 5vw, 64px);
+          line-height: 1.06;
+          margin: 0 0 16px;
+        }
 
-.work-list li{
-  font-size:14px;
-   
-  margin-bottom:6px;
-  font-size:16px;
-}
+        .aw-main-sub {
+          color: rgba(255, 255, 255, 0.38);
+          font-size: 15px;
+          line-height: 1.7;
+          margin: 0;
+        }
 
-/* orange highlighted names */
-.work-list li span{
-  color:#e65100;
-  font-weight:500;
-}
+        /* ── Bottom split (left + right) ── */
+        .aw-split {
+          display: grid;
+          grid-template-columns: 1fr 400px;
+          gap: 56px;
+          align-items: start;
+        }
 
-/* responsive */
+        /* ── Left content ── */
+        .aw-left {
+          min-width: 0;
+        }
 
-@media(max-width:768px){
+        .aw-content-wrap {
+          animation: awFadeUp 0.55s ease both;
+        }
 
-  .portfolio-card{
-    padding:20px;
-  }
+        @keyframes awFadeUp {
+          from { opacity: 0; transform: translateY(22px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
 
-  .title{
-    font-size:18px;
-    
-  }
-    h3.title {
-    color:#5e6f7f;
-    }
-  .subtitle{
-    font-size:13px;
-  }
+        /* ── Meta row: period badge + duration pill ── */
+        .aw-meta-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 20px;
+          flex-wrap: wrap;
+        }
 
-  .desc{
-    font-size:13px;
-  }
+        .aw-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(240, 176, 44, 0.08);
+          border: 1px solid rgba(240, 176, 44, 0.28);
+          color: #f0b02c;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          padding: 6px 16px;
+          border-radius: 100px;
+        }
 
-  .work-list li{
-    font-size:13px;
-  }
+        .aw-badge-dot {
+          display: block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #f0b02c;
+          animation: dotBlink 2.4s ease-in-out infinite;
+          flex-shrink: 0;
+        }
 
-}
+        .aw-duration-pill {
+          font-size: 10px;
+          font-weight: 700;
+          color: #0d0d0d;
+          background: #f0b02c;
+          padding: 4px 12px;
+          border-radius: 100px;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+        }
 
-.work-title {
-  font-weight: 600;
-   
-}
+        .aw-company {
+          color: #fff;
+          font-size: clamp(28px, 3.5vw, 48px);
+          line-height: 1.08;
+          margin: 0 0 12px;
+        }
 
-.category-item {
-       cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  cursor: pointer;
-}
+        .aw-role {
+          font-size: 12px;
+          font-weight: 700;
+          color: rgba(240, 176, 44, 0.8);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin: 0 0 20px;
+        }
 
-.circle {
-  width: 100px;
-  height: 100px;
-//   background: #ff5a52;
- border: 3px solid #f0b02c;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
-}
+        .aw-desc {
+          color: rgba(255, 255, 255, 0.55);
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1.85;
+          margin: 0 0 28px;
+          max-width: 560px;
+        }
 
-.circle h5 {
-  font-size: 14px;
-  margin: 0;
-  font-weight: 500;
-}
+        /* ── Clients block ── */
+        .aw-clients-block {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(240, 176, 44, 0.1);
+          border-left: 2px solid #f0b02c;
+          padding: 20px 24px;
+          border-radius: 0 10px 10px 0;
+        }
 
-.circle span {
-  font-size: 14px;
-  margin-top: 5px;
-}
+        .aw-clients-label {
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: #f0b02c;
+          margin: 0 0 14px;
+        }
 
-.category-item.active .circle {
-  transform: scale(1.05);
-  transition: 0.3s;
-  background: #f0b02c;
-  box-shadow: 0 0 10px #f0b02c, 0 0 20px #f0b02c;
+        /* ── Clients list ── */
+        .aw-clients {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+        }
+        .aw-clients li {
+          font-size: 16px;
+          color: #fff;
+          padding: 5px 0 5px 18px;
+          position: relative;
+          font-weight:500;
+          line-height: 1.5;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .aw-clients li::before {
+          content: "›";
+          position: absolute;
+          left: 0;
+          top: 4px;
+          color: #f0b02c;
+          font-size: 16px;
+          line-height: 1;
+        }
 
-}
+        /* ── Cards column ── */
+        .aw-cards-wrap {
+          display: flex;
+          align-items: center;
+        }
+        .aw-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+        }
 
- 
-
- 
-  
-        .category-item {
+        /* ── Individual card ── */
+        .aw-card {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.04);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 14px;
+          padding: 12px 14px;
           cursor: pointer;
+          text-align: left;
+          transition:
+            background 0.3s ease,
+            border-color 0.3s ease,
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+          overflow: hidden;
+        }
+        .aw-card:hover {
+          background: rgba(255, 255, 255, 0.08);
+          transform: translateX(-4px);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+        .aw-card--active {
+          background: rgba(240, 176, 44, 0.1);
+          border-color: rgba(240, 176, 44, 0.4);
+          box-shadow:
+            0 0 0 1px rgba(240, 176, 44, 0.15),
+            0 8px 32px rgba(240, 176, 44, 0.08);
+        }
+        .aw-card--active:hover {
+          transform: translateX(0);
         }
 
-        @media (max-width: 768px) {
-          .col-md-1 {
-            width: 100%;
-          }
+        /* ── Card thumbnail ── */
+        .aw-card-thumb {
+          position: relative;
+          width: 64px;
+          height: 64px;
+          border-radius: 10px;
+          overflow: hidden;
+          flex-shrink: 0;
+        }
+        .aw-card-img {
+          object-fit: cover;
+        }
+        .aw-card-thumb-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(7, 7, 10, 0.3);
+        }
+        .aw-card--active .aw-card-thumb-overlay {
+          background: rgba(240, 176, 44, 0.12);
+        }
 
-          .categories {
+        /* ── Card text ── */
+        .aw-card-info {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          min-width: 0;
+        }
+        .aw-card-company {
+          font-size: 13px;
+          font-weight: 700;
+          color: #fff;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .aw-card--active .aw-card-company {
+          color: #f0b02c;
+        }
+        .aw-card-period {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.38);
+          letter-spacing: 0.3px;
+        }
+        .aw-card-duration {
+          font-size: 10px;
+          font-weight: 600;
+          color: #0d0d0d;
+          background: #f0b02c;
+          padding: 2px 8px;
+          border-radius: 100px;
+          width: fit-content;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+        }
+
+        /* ── Active dot indicator ── */
+        .aw-card-active-dot {
+          position: absolute;
+          right: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #f0b02c;
+          box-shadow: 0 0 8px rgba(240, 176, 44, 0.6);
+          animation: dotBlink 2.4s ease-in-out infinite;
+        }
+
+        @keyframes dotBlink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0.3; }
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 1024px) {
+          .aw-split {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .aw-inner {
+            padding: 80px 24px;
+            gap: 44px;
+          }
+          .aw-section-header {
+            text-align: center;
+          }
+          .aw-clients {
+            grid-template-columns: 1fr;
+          }
+          .aw-overlay {
+            background: linear-gradient(
+              to bottom,
+              rgba(7, 7, 10, 0.95) 0%,
+              rgba(7, 7, 10, 0.82) 60%,
+              rgba(7, 7, 10, 0.95) 100%
+            );
+          }
+          .aw-cards {
             flex-direction: row;
             overflow-x: auto;
-            overflow-y: hidden;
-            gap: 15px;
-            padding: 10px 0;
-            align-items: center;
-            -webkit-overflow-scrolling: touch;
+            gap: 12px;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(240, 176, 44, 0.3) transparent;
           }
-
-          .categories::-webkit-scrollbar {
-            display: none;
+          .aw-card {
+            flex-direction: column;
+            min-width: 140px;
+            max-width: 140px;
+            align-items: flex-start;
+            padding: 12px;
           }
-
-          .categories {
-            scrollbar-width: none;
+          .aw-card:hover {
+            transform: translateY(-4px) translateX(0);
           }
-
-          .category-item {
-            flex: 0 0 auto;
+          .aw-card-thumb {
+            width: 100%;
+            height: 90px;
           }
-
-          .categories p {
-            display: none;
+          .aw-card-active-dot {
+            top: 10px;
+            right: 10px;
+            transform: none;
           }
+        }
 
-          .category-label {
-            display: block !important;
-            position: static;
-            margin-top: 6px;
-            display:none !important;
+        @media (max-width: 480px) {
+          .aw-inner {
+            padding: 70px 20px;
+          }
+          .aw-section {
+            min-height: auto;
+          }
+          .aw-main-heading {
+            font-size: 32px;
           }
         }
       `}</style>
-            </div>
-        </>
-    );
+    </section>
+  );
 }
-
-export default ServiceSection;

@@ -84,7 +84,7 @@ export default function Home() {
           left: 0,
           right: 0,
           height: '180px',
-          background: 'linear-gradient(to bottom, transparent, #000)',
+          // background: 'linear-gradient(to bottom, transparent, #000)',
           zIndex: 2,
           pointerEvents: 'none'
         }} />

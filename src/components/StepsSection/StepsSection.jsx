@@ -36,104 +36,132 @@ const steps = [
   },
 ];
 
-// SVG geometry — 1000×520 viewBox
-const TRACK_H = 520;
-const TOP_Y = 160;
-const BOT_Y = 360;
-const XS = [100, 300, 500, 700, 900];
+// SVG geometry
+const TRACK_H = 580;
+const TOP_Y    = 195;
+const BOT_Y    = 385;
+const XS       = [100, 300, 500, 700, 900];
 
-// Smooth cubic-bezier zig-zag path through all 5 dots
 const PATH = [
   `M ${XS[0]},${TOP_Y}`,
-  `C ${(XS[0] + XS[1]) / 2},${TOP_Y} ${(XS[0] + XS[1]) / 2},${BOT_Y} ${XS[1]},${BOT_Y}`,
-  `C ${(XS[1] + XS[2]) / 2},${BOT_Y} ${(XS[1] + XS[2]) / 2},${TOP_Y} ${XS[2]},${TOP_Y}`,
-  `C ${(XS[2] + XS[3]) / 2},${TOP_Y} ${(XS[2] + XS[3]) / 2},${BOT_Y} ${XS[3]},${BOT_Y}`,
-  `C ${(XS[3] + XS[4]) / 2},${BOT_Y} ${(XS[3] + XS[4]) / 2},${TOP_Y} ${XS[4]},${TOP_Y}`,
+  `C ${(XS[0]+XS[1])/2},${TOP_Y} ${(XS[0]+XS[1])/2},${BOT_Y} ${XS[1]},${BOT_Y}`,
+  `C ${(XS[1]+XS[2])/2},${BOT_Y} ${(XS[1]+XS[2])/2},${TOP_Y} ${XS[2]},${TOP_Y}`,
+  `C ${(XS[2]+XS[3])/2},${TOP_Y} ${(XS[2]+XS[3])/2},${BOT_Y} ${XS[3]},${BOT_Y}`,
+  `C ${(XS[3]+XS[4])/2},${BOT_Y} ${(XS[3]+XS[4])/2},${TOP_Y} ${XS[4]},${TOP_Y}`,
 ].join(" ");
 
 export default function StepsSection() {
-  const pathRef = useRef(null);
-  const glowRef = useRef(null);
-  const sectionRef = useRef(null);
-  const cardRefs = useRef([]);
-  const storedTriggers = useRef([]);
+  const pathRef     = useRef(null);
+  const glowRef     = useRef(null);
+  const travelerRef = useRef(null);
+  const sectionRef  = useRef(null);
+  const cardRefs    = useRef([]);
+  const cleanups    = useRef([]);
 
   useEffect(() => {
-    const path = pathRef.current;
-    const glow = glowRef.current;
-    const section = sectionRef.current;
+    const path     = pathRef.current;
+    const glow     = glowRef.current;
+    const traveler = travelerRef.current;
+    const section  = sectionRef.current;
     if (!path || !section) return;
 
     const len = path.getTotalLength();
-    gsap.set([path, glow], { strokeDasharray: len, strokeDashoffset: len });
 
-    // Looping line: draw over 2.2s, pause 2.8s, repeat — total cycle = 5s
-    // fromTo makes each cycle explicitly start from full length (reliable reset)
-    const lineTl = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 2.8,
-      paused: true,
+    // Initialise stroke dash
+    [path, glow].forEach((el) => {
+      if (el) {
+        el.style.strokeDasharray  = len;
+        el.style.strokeDashoffset = len;
+      }
     });
+
+    // Place traveler at start, hidden
+    if (traveler) {
+      const pt = path.getPointAtLength(0);
+      traveler.setAttribute("cx", pt.x);
+      traveler.setAttribute("cy", pt.y);
+      traveler.setAttribute("opacity", 0);
+    }
+
+    // Proxy drives both the line draw and the traveler in one timeline
+    const state = { t: 0 };
+
+    const updateVisuals = () => {
+      const t = state.t;
+      const offset = len * (1 - t);
+      if (path)     path.style.strokeDashoffset = offset;
+      if (glow)     glow.style.strokeDashoffset = offset;
+      if (traveler) {
+        const pt = path.getPointAtLength(t * len);
+        traveler.setAttribute("cx", pt.x);
+        traveler.setAttribute("cy", pt.y);
+        traveler.setAttribute("opacity", t > 0.01 ? 1 : 0);
+      }
+    };
+
+    const lineTl = gsap.timeline({ repeat: -1, repeatDelay: 3, paused: true });
     lineTl.fromTo(
-      [path, glow],
-      { strokeDashoffset: len },
-      { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut" }
+      state,
+      { t: 0 },
+      { t: 1, duration: 2.4, ease: "power2.inOut", onUpdate: updateVisuals }
     );
 
-    // Start loop when section enters view, pause when out
-    const st = ScrollTrigger.create({
+    // Play/pause on scroll visibility
+    const st1 = ScrollTrigger.create({
       trigger: section,
-      start: "top 70%",
+      start: "top 72%",
       end: "bottom top",
-      onEnter: () => lineTl.play(),
-      onLeaveBack: () => lineTl.pause(),
-      onLeave: () => lineTl.pause(),
-      onEnterBack: () => lineTl.play(),
+      onEnter:      () => lineTl.play(),
+      onLeaveBack:  () => lineTl.pause(),
+      onLeave:      () => lineTl.pause(),
+      onEnterBack:  () => lineTl.play(),
     });
-    storedTriggers.current.push(st);
+    cleanups.current.push(st1);
 
-    // Reveal each card with a staggered slide
+    // Card reveal — alternate slide from top / bottom
     cardRefs.current.forEach((el, i) => {
       if (!el) return;
       const isTop = i % 2 === 0;
-      gsap.set(el, { opacity: 0, y: isTop ? -30 : 30 });
+      gsap.set(el, { opacity: 0, y: isTop ? -40 : 40 });
 
       const st = ScrollTrigger.create({
         trigger: section,
-        start: "top 68%",
+        start: "top 70%",
         onEnter: () =>
           gsap.to(el, {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.8,
             ease: "power3.out",
-            delay: i * 0.14,
+            delay: i * 0.16,
           }),
         onLeaveBack: () =>
-          gsap.to(el, {
-            opacity: 0,
-            y: isTop ? -30 : 30,
-            duration: 0.35,
-          }),
+          gsap.to(el, { opacity: 0, y: isTop ? -40 : 40, duration: 0.3 }),
       });
-      storedTriggers.current.push(st);
+      cleanups.current.push(st);
     });
 
     return () => {
       lineTl.kill();
-      storedTriggers.current.forEach((t) => t?.kill());
+      cleanups.current.forEach((t) => t?.kill());
     };
   }, []);
 
   return (
     <section ref={sectionRef} className="sp-section">
+
+      {/* ── Background layers ── */}
+      <div className="sp-bg-grid"    aria-hidden="true" />
+      <div className="sp-bg-radial"  aria-hidden="true" />
+
       <div className="sp-inner">
 
         {/* ── Header ── */}
         <div className="sp-header">
           <span className="sp-badge">How It Works</span>
-          <h2 className="sp-heading lauxery">Our Creative Process</h2>
-          <p className="sp-sub">
+          {/* split-text up → global GSAP hook animates chars on scroll */}
+          <h2 className="sp-heading split-text up">Our Creative Process</h2>
+          <p className="sp-sub fade_bottom">
             Five focused steps — from first conversation to a live product that performs.
           </p>
         </div>
@@ -141,7 +169,6 @@ export default function StepsSection() {
         {/* ── Desktop zig-zag track ── */}
         <div className="sp-track">
 
-          {/* SVG animated line */}
           <svg
             className="sp-svg"
             viewBox={`0 0 1000 ${TRACK_H}`}
@@ -149,40 +176,51 @@ export default function StepsSection() {
             fill="none"
             aria-hidden="true"
           >
-            {/* Wide soft glow behind line */}
+            {/* Outer glow */}
             <path
               ref={glowRef}
               d={PATH}
               stroke="#f0b02c"
-              strokeWidth="14"
-              strokeOpacity="0.10"
+              strokeWidth="18"
+              strokeOpacity="0.07"
               strokeLinecap="round"
             />
-            {/* Crisp animated line */}
+            {/* Mid glow */}
+            <path
+              d={PATH}
+              stroke="#f0b02c"
+              strokeWidth="6"
+              strokeOpacity="0.06"
+              strokeLinecap="round"
+            />
+            {/* Main animated line */}
             <path
               ref={pathRef}
               d={PATH}
               stroke="#f0b02c"
-              strokeWidth="2"
+              strokeWidth="1.5"
               strokeLinecap="round"
             />
 
-            {/* Dot at each step position */}
+            {/* Anchor dots at each step */}
             {XS.map((x, i) => {
               const y = i % 2 === 0 ? TOP_Y : BOT_Y;
               return (
                 <g key={i}>
-                  {/* outer pulse ring */}
-                  <circle cx={x} cy={y} r="22" fill="#f0b02c" fillOpacity="0.08" />
-                  {/* mid ring */}
-                  <circle cx={x} cy={y} r="13" fill="#f0b02c" fillOpacity="0.18" />
-                  {/* solid dot */}
-                  <circle cx={x} cy={y} r="7" fill="#f0b02c" />
-                  {/* dark centre */}
-                  <circle cx={x} cy={y} r="3" fill="#0a0a0a" />
+                  <circle cx={x} cy={y} r="26" fill="#f0b02c" fillOpacity="0.05" />
+                  <circle cx={x} cy={y} r="14" fill="#f0b02c" fillOpacity="0.12" />
+                  <circle cx={x} cy={y} r="6"  fill="#f0b02c" />
+                  <circle cx={x} cy={y} r="2.5" fill="#0a0a0a" />
                 </g>
               );
             })}
+
+            {/* Traveler — moves along the path */}
+            <g ref={travelerRef}>
+              <circle r="14" fill="#f0b02c" fillOpacity="0.18" />
+              <circle r="7"  fill="#f0b02c" />
+              <circle r="3"  fill="#fff"    fillOpacity="0.8" />
+            </g>
           </svg>
 
           {/* Step cards overlaid on the SVG */}
@@ -195,7 +233,6 @@ export default function StepsSection() {
                 className={`sp-card ${isTop ? "sp-card--top" : "sp-card--bot"}`}
                 style={{ left: `${XS[i] / 10}%` }}
               >
-                {/* Number badge */}
                 <div className="sp-num">
                   <CountUp
                     end={step.number}
@@ -206,15 +243,18 @@ export default function StepsSection() {
                 </div>
                 <h4 className="sp-title">{step.title}</h4>
                 <p className="sp-desc">{step.desc}</p>
+
+                {/* Gold accent corner */}
+                <span className="sp-corner" aria-hidden="true" />
               </div>
             );
           })}
         </div>
 
-        {/* ── Mobile vertical list (hidden on desktop) ── */}
+        {/* ── Mobile vertical list ── */}
         <div className="sp-mobile">
           {steps.map((step, i) => (
-            <div key={step.number} className="sp-mob-item">
+            <div key={step.number} className="sp-mob-item fade_bottom">
               <div className="sp-mob-left">
                 <div className="sp-num">
                   <CountUp end={step.number} duration={1.4} enableScrollSpy scrollSpyOnce />
@@ -232,64 +272,111 @@ export default function StepsSection() {
       </div>
 
       <style jsx>{`
-        /* ── Section ── */
+
+        /* ════════════════════════════════════════
+           SECTION
+        ════════════════════════════════════════ */
         .sp-section {
-          background: #000;
-          padding: 110px 0 130px;
+          background: #050505;
+          padding: 130px 0 150px;
           overflow: hidden;
           position: relative;
         }
-        .sp-section::before {
-          content: "";
+     
+
+        /* Dot-grid texture */
+        .sp-bg-grid {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(240, 176, 44, 0.04) 0%, transparent 70%);
+          background-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.028) 1px,
+            transparent 1px
+          );
+          background-size: 36px 36px;
           pointer-events: none;
         }
-        .sp-inner {
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 0 32px;
+
+        /* Soft centre radial glow */
+        .sp-bg-radial {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse 80% 60% at 50% 55%,
+            rgba(240, 176, 44, 0.055) 0%,
+            transparent 65%
+          );
+          pointer-events: none;
         }
 
-        /* ── Header ── */
+        .sp-inner {
+          max-width: 1300px;
+          margin: 0 auto;
+          padding: 0 40px;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* ════════════════════════════════════════
+           HEADER
+        ════════════════════════════════════════ */
         .sp-header {
           text-align: center;
-          margin-bottom: 16px;
+          margin-bottom: 20px;
         }
+
         .sp-badge {
-          display: inline-block;
-          background: rgba(240, 176, 44, 0.08);
-          border: 1px solid rgba(240, 176, 44, 0.28);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(240, 176, 44, 0.07);
+          border: 1px solid rgba(240, 176, 44, 0.3);
           color: #f0b02c;
           font-size: 11px;
           font-weight: 700;
-          letter-spacing: 3px;
+          letter-spacing: 3.5px;
           text-transform: uppercase;
-          padding: 7px 22px;
+          padding: 8px 24px;
           border-radius: 100px;
-          margin-bottom: 20px;
+          margin-bottom: 28px;
         }
+
+        /* Small decorative lines beside badge text */
+        .sp-badge::before,
+        .sp-badge::after {
+          content: "";
+          display: block;
+          width: 18px;
+          height: 1px;
+          background: #f0b02c;
+          opacity: 0.5;
+        }
+
         .sp-heading {
           color: #fff;
-          font-size: clamp(30px, 4vw, 54px);
-          margin-bottom: 16px;
-          line-height: 1.15;
+          font-size: clamp(32px, 4.2vw, 58px);
+          margin-bottom: 20px;
+          line-height: 1.12;
+          font-weight: 700;
         }
+
         .sp-sub {
-          color: rgba(255, 255, 255, 0.42);
+          color: rgba(255, 255, 255, 0.48);
           font-size: 16px;
-          line-height: 1.75;
-          max-width: 500px;
+          line-height: 1.8;
+          max-width: 520px;
           margin: 0 auto;
         }
 
-        /* ── Desktop track ── */
+        /* ════════════════════════════════════════
+           DESKTOP TRACK
+        ════════════════════════════════════════ */
         .sp-track {
           position: relative;
-          height: 520px;
-          margin-top: 10px;
+          height: ${TRACK_H}px;
+          margin-top: 30px;
         }
+
         .sp-svg {
           position: absolute;
           top: 0;
@@ -299,101 +386,188 @@ export default function StepsSection() {
           pointer-events: none;
         }
 
-        /* ── Step cards ── */
+        /* ════════════════════════════════════════
+           STEP CARDS
+        ════════════════════════════════════════ */
         .sp-card {
           position: absolute;
-          width: 162px;
+          width: 182px;
           transform: translateX(-50%);
           text-align: center;
+          background: rgba(14, 14, 14, 0.96);
+          border: 1px solid rgba(240, 176, 44, 0.13);
+          border-top: 2px solid #f0b02c;
+          padding: 22px 18px 24px;
+          transition:
+            transform 0.35s ease,
+            border-color 0.35s ease,
+            box-shadow 0.35s ease;
+          cursor: default;
         }
+
+        .sp-card:hover {
+          transform: translateX(-50%) translateY(-8px);
+          border-color: rgba(240, 176, 44, 0.45);
+          box-shadow:
+            0 24px 60px rgba(0, 0, 0, 0.55),
+            0 0 40px rgba(240, 176, 44, 0.07);
+        }
+
+        /* Small decorative corner mark */
+        .sp-corner {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 20px;
+          height: 20px;
+          border-bottom: 2px solid rgba(240, 176, 44, 0.35);
+          border-right: 2px solid rgba(240, 176, 44, 0.35);
+          pointer-events: none;
+          transition: border-color 0.35s ease;
+        }
+
+        .sp-card:hover .sp-corner {
+          border-color: #f0b02c;
+        }
+
         .sp-card--top {
           top: 0;
         }
+
         .sp-card--bot {
-          top: 370px;
+          top: 398px;
         }
 
         /* Number circle */
         .sp-num {
-          width: 56px;
-          height: 56px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
           background: linear-gradient(135deg, #f0b02c 0%, #c87600 100%);
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 14px;
+          margin: 0 auto 16px;
           font-size: 22px;
           font-weight: 800;
           color: #000;
           box-shadow:
-            0 0 0 6px rgba(240, 176, 44, 0.10),
-            0 0 28px rgba(240, 176, 44, 0.38);
+            0 0 0 7px rgba(240, 176, 44, 0.10),
+            0 0 32px rgba(240, 176, 44, 0.35);
+          transition: box-shadow 0.35s ease, transform 0.35s ease;
         }
+
+        .sp-card:hover .sp-num {
+          box-shadow:
+            0 0 0 9px rgba(240, 176, 44, 0.18),
+            0 0 48px rgba(240, 176, 44, 0.5);
+          transform: scale(1.07);
+        }
+
         .sp-title {
           color: #fff;
-          font-size: 16.5px;
-          font-weight: 750;
-          margin-bottom: 9px;
-          line-height: 1.4;
+          font-size: 13.5px;
+          font-weight: 700;
+          margin-bottom: 10px;
+          line-height: 1.45;
+          letter-spacing: 0.1px;
         }
+
         .sp-desc {
-          color: rgba(255, 255, 255, 0.38);
-          font-size: 14px;
-          line-height: 1.75;
+          color: rgba(255, 255, 255, 0.48);
+          font-size: 12px;
+          line-height: 1.8;
           margin: 0;
         }
 
-        /* ── Mobile ── */
+        /* ════════════════════════════════════════
+           MOBILE
+        ════════════════════════════════════════ */
         .sp-mobile {
           display: none;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
           .sp-section {
-            padding: 80px 0 100px;
+            padding: 90px 0 110px;
           }
+
+          .sp-inner {
+            padding: 0 24px;
+          }
+
           .sp-track {
             display: none;
           }
+
           .sp-mobile {
             display: flex;
             flex-direction: column;
-            margin-top: 48px;
+            margin-top: 56px;
+            gap: 0;
           }
+
           .sp-mob-item {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             align-items: flex-start;
           }
+
           .sp-mob-left {
             display: flex;
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
           }
+
           .sp-num {
-            width: 50px;
-            height: 50px;
-            font-size: 19px;
+            width: 54px;
+            height: 54px;
+            font-size: 20px;
             margin: 0;
           }
+
           .sp-mob-line {
-            width: 2px;
-            min-height: 44px;
+            width: 1px;
+            min-height: 48px;
             flex: 1;
-            background: linear-gradient(to bottom, #f0b02c, rgba(240, 176, 44, 0.06));
+            background: linear-gradient(
+              to bottom,
+              #f0b02c 0%,
+              rgba(240, 176, 44, 0.08) 100%
+            );
             margin: 10px 0;
           }
+
           .sp-mob-content {
-            padding: 4px 0 36px;
+            padding: 6px 0 40px;
             text-align: left;
+            background: rgba(14, 14, 14, 0.96);
+            border: 1px solid rgba(240, 176, 44, 0.13);
+            border-top: 2px solid #f0b02c;
+            padding: 20px 20px 22px;
+            margin-bottom: 24px;
+            flex: 1;
           }
+
           .sp-title {
             font-size: 15px;
+            margin-bottom: 8px;
           }
+
           .sp-desc {
-            font-size: 13px;
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.5);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .sp-heading {
+            font-size: 30px;
+          }
+
+          .sp-sub {
+            font-size: 14.5px;
           }
         }
       `}</style>

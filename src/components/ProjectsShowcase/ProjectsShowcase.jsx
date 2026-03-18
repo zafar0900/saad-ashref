@@ -17,7 +17,7 @@ const projects = [
     category: "Branding · Web Design",
     title: "Tale of Star",
     desc: "Full brand identity system and digital presence for a premium Dubai real estate firm — from logo creation to a high-converting property website.",
-    image: "/assets/project/taleofstar-saaddesign.gif",
+    image: "/assets/project/1747731344424.jpeg",
     link: "/ysm-real-estate",
   },
   {
@@ -37,7 +37,7 @@ const projects = [
     category: "Branding · Strategy",
     title: "Arrival Gate Tourism",
     desc: "Developed a cohesive tourism brand identity — logo, brand guidelines, and digital marketing collateral to position the agency in the UAE travel market.",
-    image: "/assets/project/ARRIVAL GATE TOURISM By Saad design.jpg",
+    image: "/assets/project/66225a9ff23b122fd13d6ca9_uc.jpeg",
     link: "/arrival-gate-tourism",
   },
   {
@@ -47,7 +47,7 @@ const projects = [
     category: "Social Media · Design",
     title: "Mazon Tours Social Media",
     desc: "End-to-end social media visual strategy and content design for a growing tours brand — boosting engagement across Instagram and Facebook.",
-    image: "/assets/project/MAZON TOURS - SOCIAL MEDIA by SAAD DESIGN.jpg",
+    image: "/assets/project/66225a9ef23b122fd13d6c9d_uc.jpeg",
     link: "/mazon-tours-social-meida",
   },
   {
@@ -57,7 +57,7 @@ const projects = [
     category: "Mobile App · UI/UX",
     title: "Dubai Tourism Mobile App",
     desc: "Designed and developed a feature-rich mobile application for Dubai Tourism Authority — helping millions of visitors navigate and explore the city.",
-    image: "/assets/project/Dubai Tourism - Mobile App by Saad design.webp",
+    image: "/assets/project/1Definition-of-Low-Voltage.webp",
     link: "/dubai-tourism-mobile-app",
   },
 ];
