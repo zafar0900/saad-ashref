@@ -168,7 +168,7 @@ export default function Hero2({ light = false }) {
             <div className="col-lg-5 order-lg-2">
               <div className="contact__form-wrapper">
                 <h3 className="title-heading ">
-                  Let's Talk About Your Next Project
+                  Let's Talk About Your Next Projects
                 </h3>
                 <form className="contact__form">
                   <div className="row g-4">

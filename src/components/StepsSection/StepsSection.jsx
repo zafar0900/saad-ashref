@@ -475,9 +475,10 @@ export default function StepsSection() {
 
         .sp-desc {
           color: rgba(255, 255, 255, 0.48);
-          font-size: 12px;
+          font-size: 14px;
           line-height: 1.8;
           margin: 0;
+          font-weight:500;
         }
 
         /* ════════════════════════════════════════

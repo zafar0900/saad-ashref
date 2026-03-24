@@ -37,7 +37,7 @@ import ServiceSections from "@/components/personal-portfolio/ServiceSection";
 import HeroMeanSection from "@/components/HeroSection/Hero"; 
 import AboutHeroSection from "@/components/AboutHeroSection/AboutHeroSection";  
 import EventsSection from "@/components/EventsSection/EventsSection"; 
-import AwardHome from "../components/awardhome/AwardHome"
+import AwardHome2 from "../components/awardhome/AwardHome2"
 import StepsSection from "@/components/StepsSection/StepsSection"
 import ProjectsShowcase from "@/components/ProjectsShowcase/ProjectsShowcase"
 
@@ -106,7 +106,7 @@ export default function Home() {
         <ZService />
         <ProjectsShowcase />
         {/* <PortfolioSection /> */}
-        <AwardHome />
+        <AwardHome2 />
         <StepsSection />
          <ServiceSections/>
         
