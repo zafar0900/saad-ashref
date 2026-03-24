@@ -17,14 +17,14 @@ const BlogDetails = ({ slug }) => {
 
   return (
     <div className="blog-details-area section-padding-bottom overflow-hidden">
-
+ 
       
           <div className="container  Blog_data">
             <div className="row">
             <h1 className="luxury-heading"  style={{marginBlock:"10px"}}>Top Reasons Why Professional Logo Design in Dubai</h1>
               <div className="col-12 p-xxl-0">
                 <div className="blog-details__thumb reveal left overflow-hidden">
-                  <img src="/assets/blog/blog-1/Logo Design in Dubai.jpg" alt="blog banner" />
+                  <img src="/mistersaadassets/blog/blog-1/Logo Design in Dubai.jpg" alt="blog banner" />
                 </div>
               </div>
             </div>
@@ -78,7 +78,7 @@ const BlogDetails = ({ slug }) => {
                   <div className="col-xl-6 d-none d-xl-block">
                     <div className="   overflow-hidden ">
                       <img
-                        src="/assets/blog/blog-1/Design.jpg"
+                        src="/mistersaadassets/blog/blog-1/Logo Design in Dubai.jpg"
                         alt="Design"
                       />
                     </div>
@@ -123,7 +123,7 @@ const BlogDetails = ({ slug }) => {
                   <div className="col-xl-6 d-none d-xl-block">
                     <div className="   overflow-hidden right_image">
                       <img
-                        src="/assets/blog/blog-1/freelance Logo Design in Dubai.jpg"
+                        src="/mistersaadassets/blog/blog-1/Logo Design in Dubai.jpg"
                         alt="freelance Logo Design in Dubai"
                       />
                     </div>
@@ -180,7 +180,7 @@ const BlogDetails = ({ slug }) => {
                   <div className="col-xl-6 d-none d-xl-block">
                     <div className="   overflow-hidden ">
                       <img
-                        src="/assets/blog/blog-1/Professional Logo Design Dubai.jpg"
+                        src="/mistersaadassets/blog/blog-1/Logo Design in Dubai.jpg"
                         alt="Professional Logo Design Dubai"
                       />
                     </div>
@@ -226,7 +226,7 @@ const BlogDetails = ({ slug }) => {
                   <div className="col-xl-6 d-none d-xl-block">
                     <div className="   overflow-hidden right_image">
                       <img
-                        src="/assets/blog/blog-1/Top Reasons Why Professional Logo Design in Dubai.png"
+                        src="/mistersaadassets/blog/blog-1/Logo Design in Dubai.jpg"
                         alt="Top Reasons Why Professional Logo Design in Dubai"
                       />
                     </div>

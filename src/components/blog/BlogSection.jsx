@@ -15,7 +15,7 @@ const BlogSection = () => {
     activeFilter === "all" ? true : post?.categories?.includes(activeFilter)
   );
 
-  return (
+  return ( 
 
 
     <section className="blog-area blog-filter-area section-padding-top-bottom before-shape after-shape">
